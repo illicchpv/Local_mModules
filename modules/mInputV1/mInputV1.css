@@ -1,0 +1,22 @@
+/* mInputV1.css */
+.mInputV1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24;
+  padding: 10px;
+  border: 1px solid lightslategray;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  .label{
+    flex-shrink: 1;
+  }
+  .input{
+    width: 70%;
+  }
+}
