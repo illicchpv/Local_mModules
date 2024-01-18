@@ -53,13 +53,11 @@
   </div>
 
   <div class="container">
-
     <div class="incs" data-incs='{ 
       onLoadCallback(el){
         try{
-          const iname = "instance1";
-          const inst = mButtonV1.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mButtonV1, el: el, appName:``, instName: `instance1`})
+          
           inst.text = "--text1--";
           inst.onClick = (event, el) => {
             console.log(`произошел inst.onClick`);
@@ -68,40 +66,14 @@
       },
       incFile: modulesUrl + "mButtonV1/mButtonV1.html",
     }'>этот элемент будет заменён из mButtonV1.html</div>
-
-    <script>
-    </script>
   </div>
 
   <script>
     var __modulesList = [
       {name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
     ];
-
-    document.addEventListener("DOMContentLoaded", async function () {
-      __modulesLoader.doload(__modulesList, __modulesReady);
-    });
-
-    function __modulesReady() {
-      console.log('!!! __modulesReady !!!');
-
-      IncludHtml.doIncludAll(
-        {
-          insertType: "replace", incInner: false,
-          replace: [
-            {from: '../img/', to: './img/'},
-          ],
-          incFromId: "extId",
-        },
-        (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал 
-          setTimeout(function () {
-            __modulesList.forEach(el => {el.module.renderAllInstance();});
-          }, 1);
-        }
-      );
-    }
-
   </script>
+
 </body>
 
 </html>

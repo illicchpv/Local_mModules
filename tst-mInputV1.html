@@ -25,7 +25,7 @@
   <script src="//aclive.ru/modules-tests/modules/utils.js" defer></script>
   <script src="//aclive.ru/modules-tests/modules/IncludHtml.js" defer></script>
   <script src="//aclive.ru/modules-tests/modules/modulesLoader.js" defer></script>
-  -->
+-->
   <!-- -->
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
 
@@ -58,65 +58,28 @@
       incFile: modulesUrl + "mInputV1/mInputV1.html",
       onLoadCallback(el){
         try {
-          const iname = "instance1";
-          const inst = mInputV1.createInstance(iname);
-          el.extEl.dataset.instance = iname;
-          el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mInputV1, el: el, appName:``, instName: `instance1`})
+
           inst.type = "text"
           inst.placeholder = "ваше имя"
-          inst.value = ""
+          inst.value = "ффф"
           inst.label = "Имя:"
           inst.onInput = (e, inst) => {
-            console.log(iname, "onInput", e.value);
-            // inst.render()
+            console.log(inst.iname, "onInput", e.value);
           }
           inst.onChange = (e) => {
-            console.log(iname, "onChange", e);
+            console.log(inst.iname, "onChange", e);
           }
         } catch (e) {}
       },
     }'>этот элемент будет заменён из mInputV1.html
     </div>
-
   </div>
-  <script>
-    function aaa(el) {
-      try {
-      } catch (e) {
-      }
-    }
-  </script>
 
   <script>
     var __modulesList = [
       {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
     ];
-
-    document.addEventListener("DOMContentLoaded", async function () {
-      __modulesLoader.doload(__modulesList, __modulesReady);
-    });
-
-    function __modulesReady() {
-      console.log('!!! __modulesReady !!!');
-
-      IncludHtml.doIncludAll(
-        {
-          insertType: "replace", incInner: false,
-          replace: [
-            {from: '../img/', to: './img/'},
-          ],
-          incFromId: "extId",
-        },
-        (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал
-          setTimeout(function () {
-            __modulesList.forEach(el => {
-              el.module.renderAllInstance();
-            });
-          }, 1);
-        }
-      );
-    }
-
   </script>
 </body>
 

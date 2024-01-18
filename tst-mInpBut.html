@@ -54,24 +54,17 @@
   </div>
 
   <div class="container">
-
     <!-- a1_instance1 -->
     <div class="incs" data-incs='{
       incFile: modulesUrl + "mInpBut/mInpBut.html",
       onLoadCallback(el){
         try{
-          const aname = "a1_"; // если на стр. несколько mInpBut то для каждой aname уникально
-          const iname = aname + "instance1";
-          const inst = mInpBut.createInstance(iname);
-          el.extEl.dataset.app = aname; 
-          el.extEl.dataset.instance = iname; 
-          el.extEl.classList.add(iname);
-          inst.aname = aname;
+          const inst = initInstance({ module: mInpBut, el: el, appName:`a1_`, instName: `instance1`})
+
           inst.title = ``;
         }catch(e){}
       },
     }'>этот элемент будет заменён из mInpBut.html</div>
-
   </div>
   <div class="container">
 
@@ -80,27 +73,13 @@
       incFile: modulesUrl + "mInpBut/mInpBut.html",
       onLoadCallback(el){
         try{
-          const aname = "a2_"
-          const iname = aname + "instance1";
-          const inst = mInpBut.createInstance(iname);
-          el.extEl.dataset.app = aname; 
-          el.extEl.dataset.instance = iname; 
-          el.extEl.classList.add(iname);
-          inst.aname = aname;
+          const inst = initInstance({ module: mInpBut, el: el, appName:`a2_`, instName: `instance1`})
+
           inst.title = "форма №10";
         }catch(e){}
       },
     }'>этот элемент будет заменён из mInpBut.html</div>
-
   </div>
-
-  <script>
-    function aaa(el) {
-      try {
-      } catch (e) {
-      }
-    }
-  </script>
 
   <script>
     var __modulesList = [
@@ -108,30 +87,6 @@
       {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
       {name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
     ];
-
-    document.addEventListener("DOMContentLoaded", async function () {
-      __modulesLoader.doload(__modulesList, __modulesReady);
-    });
-
-    function __modulesReady() {
-      console.log('!!! __modulesReady !!!');
-
-      IncludHtml.doIncludAll(
-        {
-          insertType: "replace", incInner: false,
-          replace: [
-            {from: '../img/', to: './img/'},
-          ],
-          incFromId: "extId",
-        },
-        (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал
-          setTimeout(function () {
-            __modulesList.forEach(el => {el.module.renderAllInstance();});
-          }, 1);
-        }
-      );
-    }
-
   </script>
 </body>
 

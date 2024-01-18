@@ -58,9 +58,8 @@
       incFile: modulesUrl + "mminimal/mminimal.html",
       onLoadCallback(el){
         try{
-          const iname = "instance1";
-          const inst = mminimal.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mminimal, el: el, appName:``, instName: `instance1`})
+
           inst.counter = 30;
         }catch(e){}
       },
@@ -72,30 +71,6 @@
     var __modulesList = [
       {name: 'mminimal', js: modulesUrl + 'mminimal/mminimal.js', css: modulesUrl + 'mminimal/mminimal.css', },
     ];
-
-    document.addEventListener("DOMContentLoaded", async function () {
-      __modulesLoader.doload(__modulesList, __modulesReady);
-    });
-
-    function __modulesReady() {
-      console.log('!!! __modulesReady !!!');
-
-      IncludHtml.doIncludAll(
-        {
-          insertType: "replace", incInner: false,
-          replace: [
-            {from: '../img/', to: './img/'},
-          ],
-          incFromId: "extId",
-        },
-        (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал
-          setTimeout(function () {
-            __modulesList.forEach(el => {el.module.renderAllInstance();});
-          }, 1);
-        }
-      );
-    }
-
   </script>
 </body>
 
