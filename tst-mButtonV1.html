@@ -11,7 +11,7 @@
   <script>var isLocal = false; var isMainLocal = true;</script>
   <script src="./isLocal.js"></script>
   <script>
-    var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/modules/'
+    var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
   </script>
 
   <!-- local основные скрипты
@@ -33,9 +33,11 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
     }
+
     h1 {
       text-align: center;
     }
+
     .container {
       max-width: 1200px;
       background-color: lightcyan;
@@ -66,18 +68,18 @@
       },
       incFile: modulesUrl + "mButtonV1/mButtonV1.html",
     }'>этот элемент будет заменён из mButtonV1.html</div>
-    
+
     <script>
     </script>
   </div>
 
   <script>
     var __modulesList = [
-      { name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
-    ]
+      {name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
+    ];
 
     document.addEventListener("DOMContentLoaded", async function () {
-      __modulesLoader.doload(__modulesList, __modulesReady)
+      __modulesLoader.doload(__modulesList, __modulesReady);
     });
 
     function __modulesReady() {
@@ -87,14 +89,14 @@
         {
           insertType: "replace", incInner: false,
           replace: [
-            { from: '../img/', to: './img/' },
+            {from: '../img/', to: './img/'},
           ],
           incFromId: "extId",
         },
         (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал 
           setTimeout(function () {
-            __modulesList.forEach(el => { el.module.renderAllInstance() })
-          }, 1)
+            __modulesList.forEach(el => {el.module.renderAllInstance();});
+          }, 1);
         }
       );
     }
