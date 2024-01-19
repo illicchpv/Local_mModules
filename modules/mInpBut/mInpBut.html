@@ -3,18 +3,16 @@
       incFile: modulesUrl + "mInpBut/mInpBut.html",
       onLoadCallback(el){
         try{
-          const aname = "a1_"; // если на стр. несколько mInpBut то для каждой aname уникально
-          const iname = aname + "instance1";
-          const inst = mInpBut.createInstance(iname);
-          el.extEl.dataset.app = aname; 
-          el.extEl.dataset.instance = iname; 
-          el.extEl.classList.add(iname);
-          inst.aname = aname;
+          const inst = initInstance({ module: mInpBut, el: el, 
+            appName:`a1_`, 
+            instName: `instance1`}
+          );
+
           inst.title = ``;
         }catch(e){}
       },
     }'>этот элемент будет заменён из mInpBut.html</div>
--->
+  -->
 <div id="extId" class="mInpBut">
 
   <h2>mInpBut.<span class="instance">instance</span></h2>
@@ -27,19 +25,17 @@
       onLoadCallback(el){
         try {
           const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iName";
-          const inst = mInputV1.createInstance(iname);
-          el.extEl.dataset.instance = iname;
-          el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mInputV1, el: el, appName: app, instName: `iName`})
+
           inst.type = "text"
           inst.placeholder = "ваше имя"
           inst.value = ""
           inst.label = "Имя:"
           inst.onInput = (e, el) => {
-            console.log(iname, "onInput", e.value);
+            console.log(inst.iname, "onInput", e.value);
           }
           inst.onChange = (e) => {
-            console.log(iname, "onChange", e);
+            console.log(inst.iname, "onChange", e);
           }
         } catch (e) {}
       },
@@ -51,19 +47,17 @@
       onLoadCallback(el){
         try {
           const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iPassword";
-          const inst = mInputV1.createInstance(iname);
-          el.extEl.dataset.instance = iname;
-          el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mInputV1, el: el, appName: app, instName: `iPassword`})
+
           inst.type = "password"
           inst.placeholder = "пароль"
           inst.value = ""
           inst.label = "Пароль:"
           inst.onInput = (e, inst) => {
-            console.log(`${iname}.onInput`, e);
+            console.log(`${inst.iname}.onInput`, e);
           }
           inst.onChange = (e) => {
-            console.log(`${iname}.onChange`, e);
+            console.log(`${inst.iname}.onChange`, e);
           }
         } catch (e) {}
       },
@@ -77,12 +71,11 @@
       onLoadCallback(el){
         try{
           const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iOk";
-          const inst = mButtonV1.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mButtonV1, el: el, appName: app, instName: `iOk`})
+          
           inst.text = "ok";
           inst.onClick = (event, el) => {
-            console.log(`произошел ${iname}.onClick`);
+            console.log(`произошел ${inst.iname}.onClick`);
             const r = mInputV1.getJsonValues([app + "iPassword", app + "iName"]);
             alert(r);
           }
@@ -96,12 +89,11 @@
       onLoadCallback(el){
         try{
           const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iReset";
-          const inst = mButtonV1.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mButtonV1, el: el, appName: app, instName: `iReset`})
+
           inst.text = "reset";
           inst.onClick = (event, el) => {
-            console.log(`произошел ${iname}.onClick`);
+            console.log(`произошел ${inst.iname}.onClick`);
             mInputV1.setValues([[app + "iPassword", ""], [app + "iName", ""]]);
           }
         }catch(e){}
@@ -114,12 +106,11 @@
       onLoadCallback(el){
         try{
           const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iPreset";
-          const inst = mButtonV1.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mButtonV1, el: el, appName: app, instName: `iPreset`})
+
           inst.text = "preset";
           inst.onClick = (event, el) => {
-            console.log(`произошел ${iname}.onClick`);
+            console.log(`произошел ${inst.iname}.onClick`);
             mInputV1.setValues([[app + "iPassword", "mypassword"], [app + "iName", "myname"]]);
           }
         }catch(e){}

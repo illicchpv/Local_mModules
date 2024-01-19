@@ -58,13 +58,12 @@
   </div>
 
   <div class="container">
-
     <!-- вставка самого модуля -->
     <div class="incs" data-incs='{
       incFile: modulesUrl + "mInputV1/mInputV1.html",
       onLoadCallback(el){
         try {
-          const inst = initInstance({ module: mInputV1, el: el, appName:``, instName: `instance1`})
+          const inst = initInstance({ module: mInputV1, el: el, instName: `instance1`})
 
           inst.type = "text"
           inst.placeholder = "ваше имя"
@@ -79,7 +78,6 @@
         } catch (e) {}
       },
     }'>этот элемент будет заменён из mInputV1.html</div>
-
   </div>
 </body>
 

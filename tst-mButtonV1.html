@@ -59,9 +59,10 @@
 
   <div class="container">
     <div class="incs" data-incs='{ 
+      incFile: modulesUrl + "mButtonV1/mButtonV1.html",
       onLoadCallback(el){
         try{
-          const inst = initInstance({ module: mButtonV1, el: el, appName:``, instName: `instance1`})
+          const inst = initInstance({ module: mButtonV1, el: el, instName: `instance1`})
           
           inst.text = "--text1--";
           inst.onClick = (event, el) => {
@@ -69,7 +70,6 @@
           }
         }catch(e){}
       },
-      incFile: modulesUrl + "mButtonV1/mButtonV1.html",
     }'>этот элемент будет заменён из mButtonV1.html</div>
   </div>
 </body>

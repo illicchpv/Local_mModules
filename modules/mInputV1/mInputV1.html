@@ -1,28 +1,23 @@
 <!--
-
     <div class="incs" data-incs='{
       incFile: modulesUrl + "mInputV1/mInputV1.html",
       onLoadCallback(el){
         try {
-          const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iName";
-          const inst = mInputV1.createInstance(iname);
-          el.extEl.dataset.instance = iname;
-          el.extEl.classList.add(iname);
+          const inst = initInstance({ module: mInputV1, el: el, instName: `instance1`})
+
           inst.type = "text"
           inst.placeholder = "ваше имя"
           inst.value = ""
           inst.label = "Имя:"
           inst.onInput = (e, el) => {
-            console.log(iname, "onInput", e.value);
+            console.log(inst.iname, "onInput", e.value);
           }
           inst.onChange = (e) => {
-            console.log(iname, "onChange", e);
+            console.log(inst.iname, "onChange", e);
           }
         } catch (e) {}
       },
     }'>этот элемент будет заменён из mInputV1.html</div>
-
 -->
 <label id="extId" class="mInputV1">
     <span class="label">mInputV1</span>

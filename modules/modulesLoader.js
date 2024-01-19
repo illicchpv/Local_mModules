@@ -105,6 +105,7 @@ function __modulesReady() {
 }
 
 function initInstance({module, el, appName, instName}) {
+  appName = !appName ? '' : appName;
   const iName = appName + instName;
   const inst = module.createInstance(iName);
   if (appName) el.extEl.dataset.app = appName;

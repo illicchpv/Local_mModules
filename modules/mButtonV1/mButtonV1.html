@@ -2,21 +2,16 @@
     <div class="incs" data-incs='{ 
       onLoadCallback(el){
         try{
-          const app = el.docEl.closest(".mInpBut").dataset.app;
-          const iname = app + "iOk";
-          const inst = mButtonV1.createInstance(iname);
-          el.extEl.dataset.instance = iname; el.extEl.classList.add(iname);
-          inst.text = "ok";
+          const inst = initInstance({ module: mButtonV1, el: el, instName: `instance1`})
+
+          inst.text = "reset";
           inst.onClick = (event, el) => {
-            console.log(`произошел ${iname}.onClick`);
-            const r = mInputV1.getJsonValues([app + "iPassword", app + "iName"]);
-            alert(r);
+            console.log(`произошел ${inst.iname}.onClick`);
           }
         }catch(e){}
       },
       incFile: modulesUrl + "mButtonV1/mButtonV1.html",
     }'>этот элемент будет заменён из mButtonV1.html</div>
-
   -->
 <div id="extId" class="mButtonV1">
   <button class="buttonName" title="mButtonV1.%buttonName%"
