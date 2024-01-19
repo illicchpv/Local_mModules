@@ -1,0 +1,27 @@
+<!-- вставка для модулей начало -->
+<script>var isLocal = false; var isMainLocal = true;</script>
+<script src="./isLocal.js"></script>
+<script>
+  var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
+</script>
+<!-- local основные скрипты
+-->
+<script>isMainLocal = true;</script>
+<script src="./modules/utils.js" defer></script>
+<script src="./modules/IncludHtml.js" defer></script>
+<script src="./modules/modulesLoader.js" defer></script>
+<!-- host основные скрипты
+<script>isMainLocal = false;</script>
+<script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
+<script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
+<script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
+-->
+<script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
+<script>
+  var __modulesList = [
+    {name: 'mInpBut', js: modulesUrl + 'mInpBut/mInpBut.js', css: modulesUrl + 'mInpBut/mInpBut.css', },
+    {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
+    {name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
+  ];
+</script>
+<!-- /вставка для модулей конец -->

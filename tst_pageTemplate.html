@@ -8,26 +8,30 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title>page-template</title>
 
+  <!-- вставка для модулей начало -->
   <script>var isLocal = false; var isMainLocal = true;</script>
   <script src="./isLocal.js"></script>
   <script>
     var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
   </script>
-
   <!-- local основные скрипты
--->
+  -->
   <script>isMainLocal = true;</script>
   <script src="./modules/utils.js" defer></script>
   <script src="./modules/IncludHtml.js" defer></script>
   <script src="./modules/modulesLoader.js" defer></script>
   <!-- host основные скрипты
-<script>isMainLocal = false;</script>
-<script src="//aclive.ru/modules-tests/modules/utils.js" defer></script>
-<script src="//aclive.ru/modules-tests/modules/IncludHtml.js" defer></script>
-<script src="//aclive.ru/modules-tests/modules/modulesLoader.js" defer></script>
--->
-  <!-- -->
+  <script>isMainLocal = false;</script>
+  <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
+  -->
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
+  <script>
+    var __modulesList = [
+      {name: 'mminimal', js: modulesUrl + 'mminimal/mminimal.js', css: modulesUrl + 'mminimal/mminimal.css', },
+    ];
+  </script>
 
   <style>
     body {
@@ -64,14 +68,7 @@
         }catch(e){}
       },
     }'>этот элемент будет заменён из mminimal.html</div>
-
   </div>
-
-  <script>
-    var __modulesList = [
-      {name: 'mminimal', js: modulesUrl + 'mminimal/mminimal.js', css: modulesUrl + 'mminimal/mminimal.css', },
-    ];
-  </script>
 </body>
 
 </html>

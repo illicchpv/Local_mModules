@@ -8,12 +8,12 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title>page-template</title>
 
+  <!-- вставка для модулей начало -->
   <script>var isLocal = false; var isMainLocal = true;</script>
   <script src="./isLocal.js"></script>
   <script>
     var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
   </script>
-
   <!-- local основные скрипты
   -->
   <script>isMainLocal = true;</script>
@@ -22,12 +22,17 @@
   <script src="./modules/modulesLoader.js" defer></script>
   <!-- host основные скрипты
   <script>isMainLocal = false;</script>
-  <script src="//aclive.ru/modules-tests/modules/utils.js" defer></script>
-  <script src="//aclive.ru/modules-tests/modules/IncludHtml.js" defer></script>
-  <script src="//aclive.ru/modules-tests/modules/modulesLoader.js" defer></script>
--->
-  <!-- -->
+  <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
+  -->
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
+  <script>
+    var __modulesList = [ // перечисление используемых модулей
+      {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
+    ];
+  </script>
+  <!-- /вставка для модулей конец -->
 
   <style>
     body {
@@ -54,6 +59,7 @@
 
   <div class="container">
 
+    <!-- вставка самого модуля -->
     <div class="incs" data-incs='{
       incFile: modulesUrl + "mInputV1/mInputV1.html",
       onLoadCallback(el){
@@ -72,15 +78,9 @@
           }
         } catch (e) {}
       },
-    }'>этот элемент будет заменён из mInputV1.html
-    </div>
-  </div>
+    }'>этот элемент будет заменён из mInputV1.html</div>
 
-  <script>
-    var __modulesList = [
-      {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
-    ];
-  </script>
+  </div>
 </body>
 
 </html>
