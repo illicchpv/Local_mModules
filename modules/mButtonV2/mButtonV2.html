@@ -2,7 +2,7 @@
     <div class="incs" data-incs='{ 
       onLoadCallback(el){
         try{
-          const inst = initInstance({ module: mButtonV1, el: el, instName: `instance1`})
+          const inst = initInstance({ module: mButtonV2, el: el, instName: `instance1`})
 
           inst.text = "reset";
           inst.onClick = (event, el) => {
@@ -10,11 +10,11 @@
           }
         }catch(e){}
       },
-      incFile: modulesUrl + "mButtonV1/mButtonV1.html",
-    }'>этот элемент будет заменён из mButtonV1.html</div>
+      incFile: modulesUrl + "mButtonV2/mButtonV2.html",
+    }'>этот элемент будет заменён из mButtonV2.html</div>
   -->
-<div id="extId" class="mButtonV1">
-  <button class="buttonName" title="mButtonV1.%buttonName%"
-    onclick="event.preventDefault(); mButtonV1.getModuleInstance(this).doClick(event, this);"
+<div id="extId" class="mButtonV2">
+  <button class="buttonName" title="mButtonV2.%buttonName%"
+    onclick="event.preventDefault(); mButtonV2.getModuleInstance(this).doClick(event, this);"
   >button name</button>
 </div>

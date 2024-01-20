@@ -1,10 +1,10 @@
-var mButtonV1 = (() => {
-  const moduleName = 'mButtonV1';
+var mButtonV2 = (() => {
+  const moduleName = 'mButtonV2';
 
   // эта часть отвечает за создание и работу порождаемых экземпляров объектов 
   const istances = {};
   const createInstance = (instanceName) => {
-    if (istances[instanceName]) throw new Error(`mButtonV1.instance '${instanceName}' already exist!`);
+    if (istances[instanceName]) throw new Error(`mButtonV2.instance '${instanceName}' already exist!`);
 
     const ins = {
       iname: instanceName,
@@ -21,7 +21,7 @@ var mButtonV1 = (() => {
         // this.iEl.querySelector('.counter').innerHTML = this.counter
         this.iEl.querySelector('.buttonName').innerHTML = this.text;
         this.iEl.querySelector('.buttonName').
-          setAttribute('title', `mButtonV1.${this.iname} #${this.clickCounter}`);
+          setAttribute('title', `mButtonV2.${this.iname} #${this.clickCounter}`);
 
         return this;
       },

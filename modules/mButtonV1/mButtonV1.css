@@ -11,13 +11,20 @@
     border: 1px solid grey;
 
     box-shadow: 0px 0px 0px 0px transparent;    
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, color 0.1s;
   }
-  .buttonName:active{
-    color: red;
+  .buttonName:focus{
+    outline: none;
   }
-  .buttonName:hover, .buttonName:focus{
+  .buttonName:focus-visible{
     border: 1px solid darkgreen;
     box-shadow: 5px 5px 6px 4px rgba(34, 60, 80, 0.2);    
   }
+  .buttonName:hover{
+    border: 1px solid darkgreen;
+    box-shadow: 5px 5px 6px 4px rgba(34, 60, 80, 0.2);    
+  }
+  .buttonName:active{
+    color: red;
+  }  
 }
