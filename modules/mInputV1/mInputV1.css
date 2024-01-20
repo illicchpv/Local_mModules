@@ -1,11 +1,12 @@
 /* mInputV1.css */
 .mInputV1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 24;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
   padding: 10px;
   border: 1px solid lightslategray;
   background-color: white;
-  color: black;
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -13,10 +14,14 @@
   align-items: center;
   gap: 10px;
 
-  .label{
+  .label {
     flex-shrink: 1;
   }
-  .input{
+
+  .input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
     width: 70%;
   }
 }
