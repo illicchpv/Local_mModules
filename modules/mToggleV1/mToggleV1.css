@@ -1,0 +1,77 @@
+/* mToggleV1.css */
+.mToggleV1 {
+  --w: 7em;
+  --h: calc( var(--w) / 2);
+  --delta: calc((var(--h) / 10)/2);
+  --d: calc(var(--h) - var(--delta)*2);
+  --bg-on: #20096d;
+  --bg-off:  #d2d2d2;
+
+  box-sizing: border-box;
+
+  input {
+    display: none;
+  }
+  .off {
+    display: block;
+  }
+  .on {
+    display: none;
+  }
+
+  .button {
+    display: inline-block;
+    background-color: var(--bg-off);
+    width: var(--w);
+    height: var(--h);
+    border-radius: var(--h);
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+  }
+  .button::before {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    width: var(--d);
+    height: var(--d);
+    border-radius: 50%;
+    margin: var(--delta);
+    transition: 0.3s;
+  }
+
+  input:checked+.button {
+    background-color: var(--bg-on);
+  }
+  input:checked+.button::before {
+    transform: translateX(110%);
+    background-color: lightgreen;
+  }
+
+  input:checked+.button .off {
+    display: none;
+  }
+  input:checked+.button .on {
+    display: block;
+  }
+
+  .off {
+    font-family: sans-serif;
+    position: absolute;
+    right: calc((90px - 2 * 5px)/2);
+    right: 30px;
+    right: calc(var(--d)/4);;
+    top: calc(var(--h)/2 - 1.3em/2);
+    color: black;
+    font-weight: 400;
+  }
+  .on {
+    font-family: sans-serif;
+    position: absolute;
+    left: 30px;
+    left: calc(var(--d)/4);
+    top: calc(var(--h)/2 - 1.3em/2);
+    color: lightgreen;
+    font-weight: 400;
+  }
+}

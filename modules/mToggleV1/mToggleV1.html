@@ -1,0 +1,25 @@
+<!-- 
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mToggleV1/mToggleV1.html",
+      onLoadCallback(el){
+        try{
+          const inst = initInstance({ module: mToggleV1, el: el, instName: `instance1`})
+          el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`%in%`,inst.iname);
+
+          inst.isChecked = true;
+          inst.onCheck = (el) => {
+            console.log(`mToggleV1.${inst.iname} event onCheck isChecked: ${inst.isChecked} `);
+          };
+        }catch(e){}
+      },
+    }'>этот элемент будет заменён из mToggleV1.html</div>
+-->
+<span id="extId" class="mToggleV1 box">
+  <input type="checkbox" id="check%in%"
+    onchange="mToggleV1.getModuleInstance(this).setChecked(this)"
+  >
+  <label class="button" for="check%in%">
+    <span class="on">ВКЛ</span>
+    <span class="off">выкл</span>
+  </label>
+</span>
