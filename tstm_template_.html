@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <title>tst_pageTemplate</title>
+
+  <!-- вставка для модулей начало -->
+  <script>var isLocal = false; var isMainLocal = true;</script>
+  <script src="./isLocal.js"></script>
+  <script>
+    var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
+  </script>
+  <!-- local основные скрипты
+  -->
+  <script>isMainLocal = true;</script>
+  <script src="./modules/utils.js" defer></script>
+  <script src="./modules/IncludHtml.js" defer></script>
+  <script src="./modules/modulesLoader.js" defer></script>
+  <!-- host основные скрипты
+  <script>isMainLocal = false;</script>
+  <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
+  <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
+  -->
+  <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
+  <script>
+    var __modulesList = [
+      {name: 'm_template_', js: modulesUrl + 'm_template_/m_template_.js', css: modulesUrl + 'm_template_/m_template_.css', },
+    ];
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      background-color: lightcyan;
+      margin: 0 auto;
+      padding: 20px 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>test page. модуль: m_template_</h1>
+  </div>
+
+  <div class="container">
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "m_template_/m_template_.html",
+      onLoadCallback(el){
+        try{
+          const inst = initInstance({ module: m_template_, el: el, instName: `instance1`})
+
+          //console.log(`${modulesUrl}${inst.mname}/res/`);
+          //el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./res/`, `${modulesUrl}${inst.mname}/res/`);
+          //console.log(`innerHTML:`, el.extEl.innerHTML.replaceAll(`./res/`, `${modulesUrl}${inst.mname}/res/`));
+
+          inst.counter = 30;
+        }catch(e){}
+      },
+    }'>этот элемент будет заменён из m_template_.html</div>
+  </div>
+</body>
+
+</html>

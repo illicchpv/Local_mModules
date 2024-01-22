@@ -7,6 +7,7 @@ var mInputV1 = (() => {
     if (istances[instanceName]) throw new Error(`mInputV1.instance '${instanceName}' already exist!`)
 
     const ins = {
+      mname: moduleName,
       iname: instanceName,
       type: 'text',
       placeholder: 'text',
@@ -35,7 +36,7 @@ var mInputV1 = (() => {
       doOnChange(e, el){
         if(this.onChange) this.onChange(e, this);
       },
-      // incCouunter() {
+      // incCounter() {
       //   this.counter++
       //   this.render()
       //   return this

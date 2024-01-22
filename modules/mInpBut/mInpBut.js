@@ -7,6 +7,7 @@ var mInpBut = (() => {
     if (istances[instanceName]) throw new Error(`mInpBut.instance '${instanceName}' already exist!`);
 
     const ins = {
+      mname: moduleName,
       iname: instanceName,
       aname: '',
       title: '',
@@ -24,7 +25,7 @@ var mInpBut = (() => {
         }
         return this;
       },
-      // incCouunter() {
+      // incCounter() {
       //   this.counter++
       //   this.render()
       //   return this

@@ -7,6 +7,7 @@ var mminimal = (() => {
     if (istances[instanceName]) throw new Error(`mminimal.instance '${instanceName}' already exist!`)
 
     const ins = {
+      mname: moduleName,
       iname: instanceName,
       counter: 0,
       // ----------------------------------------------
@@ -19,7 +20,7 @@ var mminimal = (() => {
         this.iEl.querySelector('.counter').innerHTML = this.counter
         return this
       },
-      incCouunter() {
+      incCounter() {
         this.counter++
         this.render()
         return this

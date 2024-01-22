@@ -7,6 +7,7 @@ var mToggleV1 = (() => {
     if (istances[instanceName]) throw new Error(`mToggleV1.instance '${instanceName}' already exist!`)
 
     const ins = {
+      mname: moduleName,
       iname: instanceName,
       isChecked: false,
       // counter: 0,
@@ -29,7 +30,7 @@ var mToggleV1 = (() => {
         this.isChecked = el.checked;
         if (this.onCheck) this.onCheck(el);
       },
-      // incCouunter() {
+      // incCounter() {
       //   this.counter++
       //   this.render()
       //   return this

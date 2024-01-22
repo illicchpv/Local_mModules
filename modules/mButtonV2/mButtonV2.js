@@ -7,6 +7,7 @@ var mButtonV2 = (() => {
     if (istances[instanceName]) throw new Error(`mButtonV2.instance '${instanceName}' already exist!`);
 
     const ins = {
+      mname: moduleName,
       iname: instanceName,
       text: 'my button',
       onClick: undefined,
