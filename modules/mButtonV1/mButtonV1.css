@@ -1,5 +1,7 @@
 /* mButtonV1.css */
 .mButtonV1 {
+  width: auto;
+  
   .buttonName{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;

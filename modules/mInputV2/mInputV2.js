@@ -19,6 +19,8 @@ var mInputV2 = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
+        this.iEl.querySelector('.input').setAttribute('id', `${moduleName}-${this.iname}`)
+        this.iEl.querySelector('.label').setAttribute('for', `${moduleName}-${this.iname}`)
       },
       render() {
         this.iEl.querySelector('.label').innerHTML = this.label

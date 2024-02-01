@@ -13,8 +13,12 @@
       incFile: modulesUrl + "mButtonV1/mButtonV1.html",
     }'>этот элемент будет заменён из mButtonV1.html</div>
   -->
-<div id="extId" class="mButtonV1">
+<span id="extId" class="mButtonV1">
   <button class="buttonName" title="mButtonV1.%buttonName%"
     onclick="event.preventDefault(); mButtonV1.getModuleInstance(this).doClick(event, this);"
   >button name</button>
-</div>
+</span>
+
+<!-- <button id="extId" class="mButtonV1 buttonName" title="mButtonV1.%buttonName%" type="button"
+  onclick="event.preventDefault(); mButtonV1.getModuleInstance(this).doClick(event, this);"
+>button name</button> -->
