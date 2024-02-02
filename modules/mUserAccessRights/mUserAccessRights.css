@@ -1,0 +1,92 @@
+/* mUserAccessRights.css */
+.mUserAccessRights {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24;
+  padding: 10px;
+  border: 1px solid lightslategray;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+
+  .title{
+    color: red;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .box{
+    color: blue;
+  }
+
+  details{
+    margin-bottom: 3px;
+
+    summary{
+      /* background-color: beige; */
+      padding: 10px;
+      cursor: pointer;
+      font-size: 20px;
+
+      list-style: none;
+
+      display: flex;
+      justify-content: start;
+      background-color: rgba(255, 213, 116, 0.12);
+      border-top-left-radius: 40px;
+      position: relative;
+
+      .summaryBox{
+        width: 100%;
+        margin-top: 14px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nn{
+        /* background-color: red; */
+        font-size: 24px;
+      }
+      .available{
+        color: lightgreen;
+        font-weight: 700;
+      }
+      .total{
+        color: darkgray;
+      }
+
+    }
+    summary::before{
+      content: '🌂 '; 
+      content: '📁 '; 
+      font-size: 60px;
+      /* position: absolute; */
+    }
+    &[open] summary::before{
+      content: '☂️ '; 
+      content: '📂 '; 
+      font-size: 60px;
+    }
+    .innerBox{
+      margin-left: 80px;
+      border: 1px solid #eee;
+      background-color: rgba(255, 213, 116, 0.12);      
+      padding: 0 20px;
+      border-bottom-left-radius: 40px;
+
+      p{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 30px;
+        
+        label, input{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

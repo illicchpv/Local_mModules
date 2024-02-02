@@ -467,6 +467,11 @@ let IncludHtml = (function () {
     if (onReadyPreload) onReadyPreload()
   }
 
+  async function doLoadUrls(urls){
+    const rs = await _doArrayFetch(urls);
+    return rs;
+  }
+
   function markSelectedLink(urls, urlObj, className, selectedClassName) {
     let defUrl = false
     for (const el of urls) {
@@ -507,5 +512,7 @@ let IncludHtml = (function () {
     doInsertInto,
 
     markSelectedLink,
+
+    doLoadUrls,
   };
 })();

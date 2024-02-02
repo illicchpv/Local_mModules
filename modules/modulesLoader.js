@@ -109,7 +109,7 @@ function initInstance({module, el, appName, instName}) {
   const iName = appName + instName;
   const inst = module.createInstance(iName);
   if (appName) el.extEl.dataset.app = appName;
-  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_rsurs/`, `${modulesUrl}${inst.mname}/m_rsurs/`);
+  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${inst.mname}/m_resurs/`);
   if (appName) inst.aname = appName;
   el.extEl.dataset.instance = iName;
   el.extEl.classList.add(iName);

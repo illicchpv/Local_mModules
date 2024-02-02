@@ -1,0 +1,69 @@
+<!-- 
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mUserAccessRights/mUserAccessRights.html",
+      onLoadCallback(el){
+        try{
+          const inst = initInstance({ module: mUserAccessRights, el: el, instName: `instance1`})
+
+          inst.counter = 30;
+        }catch(e){}
+      },
+    }'>этот элемент будет заменён из mUserAccessRights.html</div>
+-->
+<div id="extId" class="mUserAccessRights">
+  <!-- <span class="instance">instance</span> -->
+  <h2 class="title">mUserAccessRights. </h2>
+
+  <div class="box">
+
+    <details open>
+      <summary>
+        <div class="summaryBox">
+          
+          <div class="nn">Node name</div>
+          <div>
+            <span class="available">8</span>
+            <span class="total">22</span>
+          </div>
+        </div>
+      </summary>
+
+      <div class="innerBox">
+        <p><label for="cb1">innerBox p</label> <input type="checkbox" name="" id="cb1"></p>
+        <p><label for="cb11">innerBox p</label> <input type="checkbox" name="" id="cb11"></p>
+        <p><label for="cb12">innerBox p</label> <input type="checkbox" name="" id="cb12"></p>
+        <p><label for="cb13">innerBox p</label> <input type="checkbox" name="" id="cb13"></p>
+        <p><label for="cb14">innerBox p</label> <input type="checkbox" name="" id="cb14"></p>
+      </div>
+    </details>
+
+  </div>
+
+  <script class="nodeTemplate" type="text/html">
+    <details>
+      <summary>
+        <div class="summaryBox">
+          
+          <div class="nn">Node name</div>
+          <div>
+            <span class="available">8</span>
+            <span class="total">22</span>
+          </div>
+        </div>
+      </summary>
+
+      <div class="innerBox">
+      </div>
+    </details>
+  </script>
+
+  <script class="subNodeTemplate" type="text/html">
+    <p>
+      <label for="cb1">innerBox p</label>
+      <input type="checkbox" id="cb1" 
+        onchange="mUserAccessRights.getModuleInstance(this).doOnChange(event, this);"
+      />
+    </p>
+  </script>
+
+</div>
