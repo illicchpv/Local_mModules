@@ -63,8 +63,8 @@
         try{
           const inst = initInstance({ module: mUserAccessRights, el: el, instName: `instance1`})
 
-          inst.url0 = `/json_nodes_config.json`;
-          inst.url1 = `/json_allowed.json`;
+          inst.url0 = `./json_nodes_config.json`;
+          inst.url1 = `./json_allowed.json`;
           setTimeout(()=>{
             inst.setAccountEmail(`illich58@mail.ru`);
             //inst.doLoad();
