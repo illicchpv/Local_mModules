@@ -26,6 +26,7 @@
   <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
   <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
   -->
+  
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
   <script>
     var __modulesList = [
@@ -105,19 +106,19 @@
           hasNoCheck
           <input type="radio" name="openMode" id="openHasNoCheck" onchange="openTypeChange(this)">
         </label>
-        <button onclick="reopenRoots()">↺</button>
+        <!-- <button onclick="reopenRoots()">↺</button> -->
       </span>
       <br>
       <button type="button" onclick="selectUser()">OK</button>
       <script>
-        function reopenRoots() {
-          const inst = mUserAccessRights.getInstance(`instance1`);
-          inst.reopenRoots();
-        }
+        // function reopenRoots() {
+        //   const inst = mUserAccessRights.getInstance(`instance1`);
+        // }
         function openTypeChange(el) {
           const mode = el.id.replaceAll('open', '').toLowerCase();
           const inst = mUserAccessRights.getInstance(`instance1`);
           inst.open = mode;
+          inst.reopenRoots();
         }
         function selectUser() {
           const mail = document.getElementById(`email`).value;
