@@ -1,6 +1,6 @@
 function stringToDomElement(str){
-  let doc = new DOMParser().parseFromString(str, "text/xml");
-  return doc.firstChild 
+  const el = (new DOMParser()).parseFromString(str, "text/html");
+  return el.documentElement;
 }
 
 function getRndIntInclusive(n, m, lg){

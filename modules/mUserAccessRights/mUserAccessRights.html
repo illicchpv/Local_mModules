@@ -16,10 +16,10 @@
 
   <div class="box">
 
-    <details open>
+    <!-- <details open>
       <summary>
         <div class="summaryBox">
-          
+
           <div class="nn">Node name</div>
           <div>
             <span class="available">8</span>
@@ -35,7 +35,7 @@
         <p><label for="cb13">innerBox p</label> <input type="checkbox" name="" id="cb13"></p>
         <p><label for="cb14">innerBox p</label> <input type="checkbox" name="" id="cb14"></p>
       </div>
-    </details>
+    </details> -->
 
   </div>
 
@@ -47,7 +47,14 @@
           <div class="nn">Node name</div>
           <div>
             <span class="available">8</span>
+            из
             <span class="total">22</span>
+            <label>
+              все: 
+              <input class="rootCheck" type="checkbox" 
+                onchange="mUserAccessRights.getModuleInstance(this).doOnChangeRoot(event, this);"
+              />
+            </label>
           </div>
         </div>
       </summary>
@@ -59,8 +66,8 @@
 
   <script class="subNodeTemplate" type="text/html">
     <p>
-      <label for="cb1">innerBox p</label>
-      <input type="checkbox" id="cb1" 
+      <label>innerBox p</label>
+      <input class="subNodeCheck" type="checkbox" 
         onchange="mUserAccessRights.getModuleInstance(this).doOnChange(event, this);"
       />
     </p>

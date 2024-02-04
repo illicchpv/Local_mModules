@@ -1,8 +1,7 @@
 {
-  "user": "illich58@mail.ru",
+  "user": "user1@mail.ru",
   "allowed": [
-    {"root": 1, "subNode": 11},
-    {"root": 1, "subNode": 14},
+    {"root": 1, "subNode": 15},
     {"root": 1, "subNode": 16},
     {"root": 1, "subNode": 17},
 

@@ -15,7 +15,8 @@ var mUserAccessRights = (() => {
       url0: '',
       url1: '',
       uarInfo: undefined, // [{}, {}],
-      uarInfoLoaded: false,
+      // uarInfoLoaded: false,
+      open: 'all', // 'none' 'hasCheck' 'hasNoCheck'
       // ----------------------------------------------
       nodeTemplate: '',
       subNodeTemplate: '',
@@ -23,27 +24,76 @@ var mUserAccessRights = (() => {
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`);
         nodeTemplate = stringToDomElement(this.iEl.querySelector('.nodeTemplate').innerHTML);
-        nodeTemplate.innerHTML += ' ';
+        // nodeTemplate.innerHTML += ' ';
         subNodeTemplate = stringToDomElement(this.iEl.querySelector('.subNodeTemplate').innerHTML);
-        subNodeTemplate.innerHTML += ' ';
+        // subNodeTemplate.innerHTML += ' ';
         this.iEl.querySelector('.nodeTemplate').remove();
         this.iEl.querySelector('.subNodeTemplate').remove();
       },
       render() {
-        this.iEl.querySelector('.title').innerHTML = this.title || `${this.iname} ${this.accountEmail}`;
-        this.iEl.querySelectorAll('details').forEach(elRoots => elRoots.setAttribute('open', true));
+        if(this.accountEmail === 'no@no.no'){
+          this.iEl.querySelector('.title').innerHTML = '';
+        }
+        else{
+          this.iEl.querySelector('.title').innerHTML = this.title || `${this.iname} ${this.accountEmail}`;
+        }
+        const details = this.iEl.querySelectorAll('details');
+
+        details.forEach((el, i) => {
+          const rootCheck = el.querySelector('.rootCheck')
+          const checks = el.querySelectorAll('.subNodeCheck');
+          const avail = el.closest('details').querySelector('.available');
+          let cntAvail = 0;
+          let st = true;
+          checks.forEach(el2 => {
+            if(el2.checked) cntAvail++;
+            else st = false;
+          });
+          rootCheck.checked = st ? true : false
+          avail.innerText = cntAvail;
+          console.log(`rootCheck(${i}).checked: `, rootCheck.checked, st);
+        });
+
         return this;
+      },
+      reopenRoots(){
+        const details = this.iEl.querySelectorAll('details');
+        details.forEach((el, i) => {
+          const rootCheck = el.querySelector('.rootCheck')
+          const checks = el.querySelectorAll('.subNodeCheck');
+          const avail = el.closest('details').querySelector('.available');
+          let cntAvail = +avail.innerText;
+          {
+            const detail =el;
+            if(this.open.toLowerCase() === 'none'){
+              detail.removeAttribute('open');
+            } 
+            else if(this.open.toLowerCase() === 'hascheck'){
+              if(cntAvail > 0) detail.setAttribute('open', true);
+              else detail.removeAttribute('open');
+            }
+            else if(this.open.toLowerCase() === 'hasnocheck'){
+              if(cntAvail === 0) detail.setAttribute('open', true);
+            }
+            else {
+              detail.setAttribute('open', true);
+            }
+          }
+
+        })
       },
       build() {
         const box = this.iEl.querySelector('.box');
         box.innerHTML = '';
-        
+
         if (!this.uarInfo) return this;
         try {
           const [config, allowed] = this.uarInfo;
           config.roots.forEach(elRoots => {
             if (elRoots.root <= 0) return;
             const nn = nodeTemplate.cloneNode(true);
+            // debugger
+
             nn.querySelector('.nn').innerHTML = elRoots.name;
             const rootSubNodes = config.subNodes.filter(ell => ell.root === elRoots.root).sort((a, b) => a.subNode - b.subNode);
             const allowedRootSubNodes = allowed.allowed.filter(ell => ell.root === elRoots.root);
@@ -52,6 +102,7 @@ var mUserAccessRights = (() => {
             nn.querySelector('.total').innerHTML = rootSubNodes.length;
 
             const innerBox = nn.querySelector('.innerBox');
+            let cntAvail = 0;
             rootSubNodes.forEach(ell => {
               const nsn = subNodeTemplate.cloneNode(true);
               const id = this.mname + '_' + this.iname + '_' + ell.root + '_' + ell.subNode;
@@ -59,14 +110,43 @@ var mUserAccessRights = (() => {
               nsn.querySelector('label').setAttribute("for", id);
               nsn.querySelector('input').setAttribute("id", id);
               const e = allowedRootSubNodes.find(elll => elll.subNode === ell.subNode);
-              if (e) nsn.querySelector('input').setAttribute("checked", true);
+              if (e) {nsn.querySelector('input').setAttribute("checked", true); cntAvail++;}
 
               innerBox.append(nsn);
             });
 
+/*
+          nn.querySelector('details').setAttribute('open', true);
+          nn.querySelector('details').removeAttribute('open');
+          else if(this.open.toLowerCase() === 'hascheck'){
+            if(cntAvail > 0) el.setAttribute('open', true);
+          }
+          else if(this.open.toLowerCase() === 'hasnocheck'){
+            if(cntAvail === 0) el.setAttribute('open', true);
+          }
+*/  
+            {
+              const detail = nn.querySelector('details');
+              // debugger;
+              if(this.open.toLowerCase() === 'none'){
+                ;
+              } 
+              else if(this.open.toLowerCase() === 'hascheck'){
+                if(cntAvail > 0) detail.setAttribute('open', true);
+                // else .removeAttribute('open');
+              }
+              else if(this.open.toLowerCase() === 'hasnocheck'){
+                if(cntAvail === 0) detail.setAttribute('open', true);
+              }
+              else {
+                detail.setAttribute('open', true);
+                // details.forEach(elRoots => elRoots.setAttribute('open', true));
+              }
+            }
+
             box.append(nn);
           });
-          box.innerHTML = box.innerHTML + ' ';
+          // box.innerHTML = box.innerHTML + ' ';
 
         } catch (e) {
           console.error(`mUserAccessRights.render e:${e}`);
@@ -74,30 +154,51 @@ var mUserAccessRights = (() => {
         }
       },
       async setAccountEmail(email) {
-        if (!this.url0 || !this.url1) {
-          console.error('mUserAccessRights -- url0 или url1 не заданы!');
-          debugger;
-          return;
+        if(email === 'no@no.no'){
+          if (!this.url0) {
+            console.error('mUserAccessRights -- url0!');
+            debugger;
+            return;
+          }
+          this.accountEmail = email;
+          {
+            const dl = async (arr) => { 
+              const rez = await IncludHtml.doLoadUrls(arr);
+              return rez;
+            }
+            const rez = await dl([this.url0]);
+            this.uarInfo = [JSON.parse(rez[0].txt), {allowed: []}];
+          }
         }
-        this.accountEmail = email;
-        if (!this.uarInfoLoaded) {
-          const rez = await this.doLoad([this.url0, this.url1]);
-          this.uarInfo = [JSON.parse(rez[0].txt), JSON.parse(rez[1].txt)];
+        else{
+          if (!this.url0 || !this.url1) {
+            console.error('mUserAccessRights -- url0 или url1 не заданы!');
+            debugger;
+            return;
+          }
+          this.accountEmail = email;
+          // if (!this.uarInfoLoaded) 
+          {
+            const dl = async (arr) => { 
+              const rez = await IncludHtml.doLoadUrls(arr);
+              // this.uarInfoLoaded = true;
+              return rez;
+            }
+            const rez = await dl([this.url0, this.url1]);
+            this.uarInfo = [JSON.parse(rez[0].txt), JSON.parse(rez[1].txt)];
+          }
         }
         this.build();
         this.render();
         return this;
       },
-      async doLoad(arr) {
-        const rez = await IncludHtml.doLoadUrls(arr);
-        this.uarInfoLoaded = true;
-        return rez;
+      doOnChange(e, el) {
+        this.render();
       },
-      doOnChange(e, elRoots) {
-        // debugger;
-        const avail = elRoots.closest('details').querySelector('.available');
-        const cnt = +avail.innerText;
-        avail.innerText = elRoots.checked ? cnt + 1 : cnt - 1;
+      doOnChangeRoot(e, elSub) {
+        const nodeCheckArr = elSub.closest('details').querySelectorAll('.subNodeCheck');
+        nodeCheckArr.forEach(el => el.checked = elSub.checked)
+        this.render();
       },
       // ----------------------------------------------
     };

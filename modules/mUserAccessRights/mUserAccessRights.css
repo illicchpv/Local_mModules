@@ -9,7 +9,7 @@
   box-sizing: border-box;
 
   .title{
-    color: red;
+    /* color: red; */
     font-size: 25px;
     font-weight: 400;
     padding: 0;
@@ -18,7 +18,7 @@
     text-align: center;
   }
   .box{
-    color: blue;
+    /* color: blue; */
   }
 
   details{
@@ -26,7 +26,7 @@
 
     summary{
       /* background-color: beige; */
-      padding: 10px;
+      padding: 3px;
       cursor: pointer;
       font-size: 20px;
 
@@ -34,8 +34,8 @@
 
       display: flex;
       justify-content: start;
-      background-color: rgba(255, 213, 116, 0.12);
-      border-top-left-radius: 40px;
+      background-color: rgba(255, 213, 116, 0.22);
+      border-top-left-radius: 20px;
       position: relative;
 
       .summaryBox{
@@ -45,10 +45,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 3px;
+        margin-bottom: 7px;
+        padding-right: 60px;
       }
       .nn{
         /* background-color: red; */
-        font-size: 24px;
+        font-size: 20px;
       }
       .available{
         color: lightgreen;
@@ -57,27 +60,34 @@
       .total{
         color: darkgray;
       }
+      label{
+        padding: 0 7px;
+      }
+      .rootCheck{
+        accent-color: rgb(136, 208, 131);
+      }
 
     }
     summary::before{
       content: '🌂 '; 
       content: '📁 '; 
-      font-size: 60px;
+      font-size: 30px;
       /* position: absolute; */
     }
     &[open] summary::before{
       content: '☂️ '; 
       content: '📂 '; 
-      font-size: 60px;
+      font-size: 30px;
     }
     .innerBox{
       margin-left: 80px;
       border: 1px solid #eee;
       background-color: rgba(255, 213, 116, 0.12);      
-      padding: 0 20px;
-      border-bottom-left-radius: 40px;
+      padding: 0 10px;
+      border-bottom-left-radius: 20px;
 
       p{
+        margin-top: 0px;
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -86,6 +96,9 @@
         label, input{
           cursor: pointer;
         }
+      }
+      .subNodeCheck{
+        accent-color: rgb(192, 252, 188);
       }
     }
   }

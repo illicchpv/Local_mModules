@@ -200,11 +200,15 @@ let IncludHtml = (function () {
         .then((data) => {
           if (data) {
             // log('\\\+++++fetch url: ', url, incFromId)
-            const parser = new DOMParser(),
-              content = "text/html",
-              DOM = parser.parseFromString(data, content);
-            requestCache[url] = DOM.cloneNode(true);
-            const extEl = DOM.getElementById(incFromId); // DOM.body.querySelector('.'+pparams.incClass);
+            const newEl = _stringToDomElement(data);
+            requestCache[url] = newEl;
+            const extEl = newEl.getElementById(incFromId).cloneNode(true); 
+
+            // const parser = new DOMParser(),
+            //   content = "text/html",
+            //   DOM = parser.parseFromString(data, content);
+            // requestCache[url] = DOM.cloneNode(true);
+            // const extEl = DOM.getElementById(incFromId); // DOM.body.querySelector('.'+pparams.incClass);
 
             // const DOM = document.createElement("div");
             // DOM.insertAdjacentHTML("afterbegin", data);
@@ -442,6 +446,11 @@ let IncludHtml = (function () {
     }
   }
 
+  function _stringToDomElement(str){
+    const el = (new DOMParser()).parseFromString(str, "text/html");
+    return el;
+  }
+
   async function _preloadIncluds(urls) {
     const rs = await _doArrayFetch(urls)
     rs.forEach(el => {
@@ -450,10 +459,13 @@ let IncludHtml = (function () {
         if (url.endsWith('.json')) {
           requestCache[url] = JSON.parse(el.txt)
         } else if (url.includes('.htm')) {
-          const parser = new DOMParser(),
-            content = "text/html",
-            DOM = parser.parseFromString(el.txt, content);
-          requestCache[url] = DOM.cloneNode(true);
+          const newEl = _stringToDomElement(data);
+          requestCache[url] = newEl;
+
+          // const parser = new DOMParser(),
+          //   content = "text/html",
+          //   DOM = parser.parseFromString(el.txt, content);
+          // requestCache[url] = DOM.cloneNode(true);
         } else {
           requestCache[url] = el.txt;
         }

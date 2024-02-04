@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
-  <title>tst_pageTemplate</title>
+  <title>tst mUserAccessRights</title>
 
   <!-- вставка для модулей начало -->
   <script>var isLocal = false; var isMainLocal = true;</script>
@@ -42,11 +42,32 @@
       text-align: center;
     }
 
+    input,
+    button {
+      font-size: inherit;
+    }
+
     .container {
       max-width: 1200px;
       background-color: lightcyan;
       margin: 0 auto;
       padding: 20px 10px;
+    }
+
+    .openBlock {
+      display: inline-block;
+      padding: 5px 0;
+
+      label {
+        margin-left: 10px;
+        border-radius: 10px;
+        background-color: rgb(198, 253, 234);
+        cursor: pointer;
+      }
+
+      input {
+        margin-left: -4px;
+      }
     }
   </style>
 </head>
@@ -57,17 +78,75 @@
   </div>
 
   <div class="container">
-    <div class="incs" data-incs='{
+    <p style="font-size: 24px;">
+      выбор пользователя:
+      <input type="email" name="" id="email" list="datalistEmail" value="no@no.no">
+      <datalist id="datalistEmail">
+        <option value="no@no.no"></option>
+        <option value="user1@mail.no"></option>
+        <option value="user2@mail.no"></option>
+      </datalist>
+      <br>
+      <span class="openBlock">
+        open:
+        <label>
+          all
+          <input checked type="radio" name="openMode" id="openAll" onchange="openTypeChange(this)">
+        </label>
+        <label>
+          none
+          <input type="radio" name="openMode" id="openNone" onchange="openTypeChange(this)">
+        </label>
+        <label>
+          hasCheck
+          <input type="radio" name="openMode" id="openHasCheck" onchange="openTypeChange(this)">
+        </label>
+        <label>
+          hasNoCheck
+          <input type="radio" name="openMode" id="openHasNoCheck" onchange="openTypeChange(this)">
+        </label>
+        <button onclick="reopenRoots()">↺</button>
+      </span>
+      <br>
+      <button type="button" onclick="selectUser()">OK</button>
+      <script>
+        function reopenRoots() {
+          const inst = mUserAccessRights.getInstance(`instance1`);
+          inst.reopenRoots();
+        }
+        function openTypeChange(el) {
+          const mode = el.id.replaceAll('open', '').toLowerCase();
+          const inst = mUserAccessRights.getInstance(`instance1`);
+          inst.open = mode;
+        }
+        function selectUser() {
+          const mail = document.getElementById(`email`).value;
+          const url1 = `./json_${mail.split(`@`)[0]}_allowed.json`;
+          console.log(`url1:`, url1);
+          const inst = mUserAccessRights.getInstance(`instance1`);
+          inst.title = `заголовок - права пользователя ${mail}`;
+          inst.url1 = url1;
+          inst.setAccountEmail(mail);
+
+        }
+      </script>
+    </p>
+  </div>
+
+  <div class="container">
+    <div class="incs arClass" data-incs='{
       incFile: modulesUrl + "mUserAccessRights/mUserAccessRights.html",
       onLoadCallback(el){
         try{
-          const inst = initInstance({ module: mUserAccessRights, el: el, instName: `instance1`})
+          const inst = initInstance({ module: mUserAccessRights, el: el, 
+            instName: `instance1`})
 
+          inst.title = `Заголовок`;
+          inst.open = `all`; // none hasCheck hasNoCheck
           inst.url0 = `./json_nodes_config.json`;
-          inst.url1 = `./json_allowed.json`;
+          //inst.url1 = `./json_allowed.json`;
           setTimeout(()=>{
-            inst.setAccountEmail(`illich58@mail.ru`);
-            //inst.doLoad();
+            inst.setAccountEmail(`no@no.no`);
           }, 10);
         }catch(e){
           console.error(`mUserAccessRights.onLoadCallback e: `, e);
