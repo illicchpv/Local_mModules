@@ -74,6 +74,7 @@ var mUserAccessRights = (() => {
             }
             else if(this.open.toLowerCase() === 'hasnocheck'){
               if(cntAvail === 0) detail.setAttribute('open', true);
+              else detail.removeAttribute('open');
             }
             else {
               detail.setAttribute('open', true);
