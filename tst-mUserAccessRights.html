@@ -2,7 +2,8 @@
 <html lang="ru">
 
 <head>
-
+  <!-- http://aclive.ru/modules-tests/tst-mUserAccessRights.html -->
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
@@ -14,19 +15,20 @@
   <script>
     var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
   </script>
+
   <!-- local основные скрипты
-  -->
   <script>isMainLocal = true;</script>
   <script src="./modules/utils.js" defer></script>
   <script src="./modules/IncludHtml.js" defer></script>
   <script src="./modules/modulesLoader.js" defer></script>
+  -->
   <!-- host основные скрипты
+  -->
   <script>isMainLocal = false;</script>
   <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
   <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
   <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
-  -->
-  
+
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
   <script>
     var __modulesList = [
@@ -86,6 +88,7 @@
         <option value="no@no.no"></option>
         <option value="user1@mail.no"></option>
         <option value="user2@mail.no"></option>
+        <option value="user3@mail.no"></option>
       </datalist>
       <br>
       <span class="openBlock">
@@ -109,7 +112,7 @@
         <!-- <button onclick="reopenRoots()">↺</button> -->
       </span>
       <br>
-      <button type="button" onclick="selectUser()">OK</button>
+      <button type="button" onclick="selectUser()">OK</button> <span>user1-права заданы без *; user2 - для 'Другая' стоит *; user3 - стоит * для всего </span>
       <script>
         // function reopenRoots() {
         //   const inst = mUserAccessRights.getInstance(`instance1`);
@@ -122,7 +125,7 @@
         }
         function selectUser() {
           const mail = document.getElementById(`email`).value;
-          const url1 = `./json_${mail.split(`@`)[0]}_allowed.json`;
+          const url1 = `./a_${mail.split(`@`)[0]}_allow.json`;
           console.log(`url1:`, url1);
           const inst = mUserAccessRights.getInstance(`instance1`);
           inst.title = `заголовок - права пользователя ${mail}`;
@@ -144,8 +147,8 @@
 
           inst.title = `Заголовок`;
           inst.open = `all`; // none hasCheck hasNoCheck
-          inst.url0 = `./json_nodes_config.json`;
-          //inst.url1 = `./json_allowed.json`;
+          //inst.url0 = `./json_nodes_config.json`;
+          inst.url0 = `./a_config.json`;
           setTimeout(()=>{
             inst.setAccountEmail(`no@no.no`);
           }, 10);

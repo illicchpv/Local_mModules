@@ -2,9 +2,9 @@ var mUserAccessRights = (() => {
   const moduleName = 'mUserAccessRights';
 
   // эта часть отвечает за создание и работу порождаемых экземпляров объектов 
-  const istances = {};
+  const instances = {};
   const createInstance = (instanceName) => {
-    if (istances[instanceName]) throw new Error(`mUserAccessRights.instance '${instanceName}' already exist!`);
+    if (instances[instanceName]) throw new Error(`mUserAccessRights.instance '${instanceName}' already exist!`);
 
     const ins = {
       mname: moduleName,
@@ -51,7 +51,7 @@ var mUserAccessRights = (() => {
           });
           rootCheck.checked = st ? true : false
           avail.innerText = cntAvail;
-          console.log(`rootCheck(${i}).checked: `, rootCheck.checked, st);
+          // console.log(`rootCheck(${i}).checked: `, rootCheck.checked, st);
         });
 
         return this;
@@ -110,7 +110,7 @@ var mUserAccessRights = (() => {
               nsn.querySelector('label').innerHTML = ell.name;
               nsn.querySelector('label').setAttribute("for", id);
               nsn.querySelector('input').setAttribute("id", id);
-              const e = allowedRootSubNodes.find(elll => elll.subNode === ell.subNode);
+              const e = allowedRootSubNodes.find(el3 => el3.subNode === '*' || el3.subNode === ell.subNode);
               if (e) {nsn.querySelector('input').setAttribute("checked", true); cntAvail++;}
 
               innerBox.append(nsn);
@@ -168,7 +168,11 @@ var mUserAccessRights = (() => {
               return rez;
             }
             const rez = await dl([this.url0]);
-            this.uarInfo = [JSON.parse(rez[0].txt), {allowed: []}];
+            let config = JSON.parse(rez[0].txt);
+            if(!config.roots){
+              config = formatConfigConvert(config, namePref = 'блок');
+            }
+            this.uarInfo = [config, {allowed: []}];
           }
         }
         else{
@@ -186,7 +190,15 @@ var mUserAccessRights = (() => {
               return rez;
             }
             const rez = await dl([this.url0, this.url1]);
-            this.uarInfo = [JSON.parse(rez[0].txt), JSON.parse(rez[1].txt)];
+            let config = JSON.parse(rez[0].txt);
+            if(!config.roots){
+              config = formatConfigConvert(config, namePref = 'блок');
+            }
+            let allow = JSON.parse(rez[1].txt)
+            if(!allow.allowed){
+              allow = formatAccessConvert(config, allow)
+            }
+            this.uarInfo = [config, allow];
           }
         }
         this.build();
@@ -203,27 +215,27 @@ var mUserAccessRights = (() => {
       },
       // ----------------------------------------------
     };
-    istances[instanceName] = ins;
+    instances[instanceName] = ins;
 
     setTimeout(function (ins) {ins.constructor();}, 0, ins);
     return ins;
   };
   const getInstance = (instanceName) => {
-    return istances[instanceName];
+    return instances[instanceName];
   };
   const getModuleInstance = (elRoots) => {
-    const inst = istances[elRoots.closest('.' + moduleName).dataset.instance];
+    const inst = instances[elRoots.closest('.' + moduleName).dataset.instance];
     // console.log('inst: ', inst);
 
     return inst;
   };
   const renderAllInstance = () => {
-    for (const [key, value] of Object.entries(istances)) {
+    for (const [key, value] of Object.entries(instances)) {
       value.render(); // render all module2 instances
     }
   };
   const scanAllInstance = (cbFunc) => {
-    for (const [key, value] of Object.entries(istances)) {
+    for (const [key, value] of Object.entries(instances)) {
       cbFunc(value);
     }
   };

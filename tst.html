@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function formatConfigConvert(json, namePref = 'блок') {
+      if (namePref) namePref = namePref.trim() + ' ';
+      const rez = {};
+      rez.roots = Object.entries(json).map(el => {
+        const [name, id] = el[0].split('|');
+        return {
+          root: id.trim(),
+          name: name.trim(),
+        };
+      });
+      const add = Object.entries(json).map(el => {
+        const [, id] = el[0].split('|');
+        return el[1].map(el => {
+          return {
+            root: id.trim(),
+            subNode: `${el}`,
+            name: `${namePref}${el}`
+          };
+        });
+      });
+      rez.subNodes = add.reduce((sum, el) => [...sum, ...el], []);
+      return rez;
+    }
+
+    function formatAccessConvert(cfg, ar) {
+      const rez = {};
+      const allAll = ar.find(el => el.name === '*');
+      if (allAll) {
+        rez.allowed = cfg.roots.map(el => {
+          return {
+            root: el.root,
+            subNode: "*",
+          };
+        });
+      }
+      else {
+        const add = ar.map(el => {
+          return el.allow.map(el2 => {
+            return {
+              root: el.name,
+              subNode: el2,
+            };
+          });
+        });
+        // debugger;
+        rez.allowed = add.reduce((sum, el) => {
+          const all = el.find(el2 => el2.subNode === '*');
+          if (all) {
+            return [...sum, all];
+          }
+          return [...sum, ...el];
+        }, []);
+      }
+      return rez;
+    }
+
+  </script>
+
+  <script>
+    var cfg = {
+      "Балаковская|BAL": [1, 2],
+      "Нововоронежcкая|NOV": [1],
+      "Другая|DRU": [1, 2, 3]
+    };
+    const ar = [
+      {"name": "BAL", "allow": ["1", "2", "4"]},
+      // {"name": "*"},
+      {"name": "DRU", "allow": ["2", "3"]}
+    ];
+
+    const rezCfg = formatConfigConvert(cfg, "блок");
+    console.log('rezCfg: ', JSON.stringify(rezCfg, null, 2));
+
+    const rezAr = formatAccessConvert(rezCfg, ar);
+    console.log('rezAr: ', JSON.stringify(rezAr, null, 2));
+
+  </script>
+
+</body>
+
+</html>

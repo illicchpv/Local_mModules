@@ -2,9 +2,9 @@ var mminimal = (() => {
   const moduleName = 'mminimal'
 
   // эта часть отвечает за создание и работу порождаемых экземпляров объектов 
-  const istances = {}
+  const instances = {}
   const createInstance = (instanceName) => {
-    if (istances[instanceName]) throw new Error(`mminimal.instance '${instanceName}' already exist!`)
+    if (instances[instanceName]) throw new Error(`mminimal.instance '${instanceName}' already exist!`)
 
     const ins = {
       mname: moduleName,
@@ -27,27 +27,27 @@ var mminimal = (() => {
       },
       // ----------------------------------------------
     }
-    istances[instanceName] = ins
+    instances[instanceName] = ins
 
     setTimeout(function (ins) { ins.constructor() }, 0, ins)
     return ins
   }
   const getInstance = (instanceName) => {
-    return istances[instanceName]
+    return instances[instanceName]
   }
   const getModuleInstance = (el) => {
-    const inst = istances[el.closest('.' + moduleName).dataset.instance]
+    const inst = instances[el.closest('.' + moduleName).dataset.instance]
     // console.log('inst: ', inst);
 
     return inst
   }
   const renderAllInstance = () => {
-    for (const [key, value] of Object.entries(istances)) {
+    for (const [key, value] of Object.entries(instances)) {
       value.render() // render all module2 instances
     }
   }
   const scanAllInstance = (cbFunc) => {
-    for (const [key, value] of Object.entries(istances)) {
+    for (const [key, value] of Object.entries(instances)) {
       cbFunc(value)
     }
   }
