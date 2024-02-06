@@ -92,17 +92,16 @@ var mUserAccessRights = (() => {
           const [config, allowed] = this.uarInfo;
           config.roots.forEach(elRoots => {
             if (elRoots.root <= 0) return;
-            const nn = nodeTemplate.cloneNode(true);
-            // debugger
+            const detail = nodeTemplate.cloneNode(true);
 
-            nn.querySelector('.nn').innerHTML = elRoots.name;
+            detail.querySelector('.nn').innerHTML = elRoots.name;
             const rootSubNodes = config.subNodes.filter(ell => ell.root === elRoots.root).sort((a, b) => a.subNode - b.subNode);
             const allowedRootSubNodes = allowed.allowed.filter(ell => ell.root === elRoots.root);
 
-            nn.querySelector('.available').innerHTML = allowedRootSubNodes.length;
-            nn.querySelector('.total').innerHTML = rootSubNodes.length;
+            detail.querySelector('.available').innerHTML = allowedRootSubNodes.length;
+            detail.querySelector('.total').innerHTML = rootSubNodes.length;
 
-            const innerBox = nn.querySelector('.innerBox');
+            const innerBox = detail.querySelector('.innerBox');
             let cntAvail = 0;
             rootSubNodes.forEach(ell => {
               const nsn = subNodeTemplate.cloneNode(true);
@@ -116,36 +115,22 @@ var mUserAccessRights = (() => {
               innerBox.append(nsn);
             });
 
-/*
-          nn.querySelector('details').setAttribute('open', true);
-          nn.querySelector('details').removeAttribute('open');
-          else if(this.open.toLowerCase() === 'hascheck'){
-            if(cntAvail > 0) el.setAttribute('open', true);
-          }
-          else if(this.open.toLowerCase() === 'hasnocheck'){
-            if(cntAvail === 0) el.setAttribute('open', true);
-          }
-*/  
             {
-              const detail = nn.querySelector('details');
-              // debugger;
               if(this.open.toLowerCase() === 'none'){
                 ;
               } 
               else if(this.open.toLowerCase() === 'hascheck'){
                 if(cntAvail > 0) detail.setAttribute('open', true);
-                // else .removeAttribute('open');
               }
               else if(this.open.toLowerCase() === 'hasnocheck'){
                 if(cntAvail === 0) detail.setAttribute('open', true);
               }
               else {
                 detail.setAttribute('open', true);
-                // details.forEach(elRoots => elRoots.setAttribute('open', true));
               }
             }
 
-            box.append(nn);
+            box.append(detail);
           });
           // box.innerHTML = box.innerHTML + ' ';
 
