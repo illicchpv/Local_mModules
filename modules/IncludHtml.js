@@ -348,6 +348,8 @@ let IncludHtml = (function () {
       }
 
     } else { // заменяем всё содержимое на innerHTML или outerHTML вставляемого
+      // добавляем классы указанные в docEl, чтоб они присутствовали в результирующем 
+      params.docEl.classList.forEach(el => params.extEl.classList.add(el))
       if (incInner) {
         // params.docEl.outerHTML = params.extEl.innerHTML;
         params.docEl.outerHTML = params.extEl.innerHTML;
