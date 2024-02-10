@@ -11,12 +11,14 @@ var mUserAccessRights = (() => {
       iname: instanceName,
       // counter: 0,
       title: '',
+      noUserTitle: '',
       accountEmail: '',
       url0: '',
       url1: '',
       uarInfo: undefined, // [{}, {}],
       // uarInfoLoaded: false,
       open: 'all', // 'none' 'hasCheck' 'hasNoCheck'
+      style: 'mUserAccessRights.css', // mUserAccessRightsV2.css
       // ----------------------------------------------
       nodeTemplate: '',
       subNodeTemplate: '',
@@ -32,7 +34,7 @@ var mUserAccessRights = (() => {
       },
       render() {
         if(this.accountEmail === 'no@no.no'){
-          this.iEl.querySelector('.title').innerHTML = '';
+          this.iEl.querySelector('.title').innerHTML = this.noUserTitle || `${this.iname} ${this.accountEmail}`;
         }
         else{
           this.iEl.querySelector('.title').innerHTML = this.title || `${this.iname} ${this.accountEmail}`;
@@ -197,6 +199,19 @@ var mUserAccessRights = (() => {
         const nodeCheckArr = elSub.closest('details').querySelectorAll('.subNodeCheck');
         nodeCheckArr.forEach(el => el.checked = elSub.checked)
         this.render();
+      },
+      setStyle(style){
+        const s = document.getElementById(moduleName+'_css')
+        if(s) {
+          if(style.indexOf('/') < 0) s.href  = s.href.substring(0,s.href.lastIndexOf('/')+1) + style;
+          else s.href  = style;
+        }
+      },
+      set urlConfig(v){
+        this.url0 = v;
+      },
+      set urlUserAccess(v){
+        this.url1 = v;
       },
       // ----------------------------------------------
     };

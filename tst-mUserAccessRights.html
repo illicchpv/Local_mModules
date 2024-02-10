@@ -112,7 +112,10 @@
         <!-- <button onclick="reopenRoots()">↺</button> -->
       </span>
       <br>
-      <button type="button" onclick="selectUser()">OK</button> <span>user1-права заданы без *; user2 - для 'Другая' стоит *; user3 - стоит * для всего </span>
+      <button type="button" onclick="selectUser()">OK</button> <span>user1-права заданы без *; user2 - для 'Другая' стоит *; user3 - стоит * для всего </span> 
+      <br>
+      <button type="button" onclick="changeStyle1()">changeStyle1</button>
+      <button type="button" onclick="changeStyle2()">changeStyle2</button>
       <script>
         // function reopenRoots() {
         //   const inst = mUserAccessRights.getInstance(`instance1`);
@@ -129,9 +132,16 @@
           console.log(`url1:`, url1);
           const inst = mUserAccessRights.getInstance(`instance1`);
           inst.title = `заголовок - права пользователя ${mail}`;
-          inst.url1 = url1;
+          inst.urlUserAccess = url1;
           inst.setAccountEmail(mail);
-
+        }
+        function changeStyle1(){
+          const inst = mUserAccessRights.getInstance(`instance1`);
+          inst.setStyle('./modules/mUserAccessRights/mUserAccessRights.css')
+        }
+        function changeStyle2(){
+          const inst = mUserAccessRights.getInstance(`instance1`);
+          inst.setStyle('mUserAccessRightsV2.css')
         }
       </script>
     </p>
@@ -146,10 +156,14 @@
             instName: `instance1`})
 
           inst.title = `Заголовок`;
+          inst.noUserTitle = `Структура хранилища`;
           inst.open = `all`; // none hasCheck hasNoCheck
-          //inst.url0 = `./json_nodes_config.json`;
-          inst.url0 = `./a_config.json`;
+          inst.urlConfig = `./a_config.json`; //  `./json_nodes_config.json`;
+          inst.setStyle(`mUserAccessRightsV2.css`)
           setTimeout(()=>{
+            //inst.title = `заголовок - права пользователя ${mail}`;
+            //inst.urlUserAccess = url1;
+            //inst.setAccountEmail(mail);
             inst.setAccountEmail(`no@no.no`);
           }, 10);
         }catch(e){

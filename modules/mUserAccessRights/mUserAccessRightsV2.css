@@ -1,0 +1,77 @@
+/* mUserAccessRights.css */
+.mUserAccessRights {
+  max-width: 600px;
+  min-width: 500px;
+  box-sizing: border-box;
+
+  .title{
+    font-size: 1.3em;
+  }
+  .box{
+  }
+
+  details{
+    margin-bottom: 3px;
+
+    summary{
+      display: flex;
+      justify-content: start;
+      /* background-color: rgba(255, 213, 116, 0.05); */
+      position: relative;
+      cursor: pointer;
+
+      .summaryBox{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 3px;
+        margin-top: .4em;
+        margin-left: 5px;
+      }
+      .nn{
+        font-size: 1.2em;
+      }
+      .info{
+        display: flex;
+        gap: 3px;
+      }
+      .available{
+        font-weight: 700;
+      }
+      .total{
+        margin-right: 10px;
+      }
+      label{
+        display: flex;
+      }
+      .rootCheck{
+        accent-color: rgb(192, 252, 188);
+      }
+
+    }
+    summary::before{
+      content: '⯈'; /* ▼ ▼  ▶ ▶  ▼  ▲/▼ ◀/▶ ⯅⯇  */
+      font-size: 1.5em;
+    }
+    &[open] summary::before{
+      content: '⯆';
+    }
+    .innerBox{
+
+      p{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 30px;
+        
+        label, input{
+          cursor: pointer;
+        }
+      }
+      .subNodeCheck{
+        accent-color: rgb(192, 252, 188);
+      }
+    }
+  }
+}
