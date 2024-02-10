@@ -461,7 +461,7 @@ let IncludHtml = (function () {
         if (url.endsWith('.json')) {
           requestCache[url] = JSON.parse(el.txt)
         } else if (url.includes('.htm')) {
-          const newEl = _stringToDomElement(data);
+          const newEl = _stringToDomElement(el.txt);
           requestCache[url] = newEl;
 
           // const parser = new DOMParser(),

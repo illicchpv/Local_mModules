@@ -14,8 +14,8 @@ var __modulesLoader = (() => {
         const jsList = el.css.split(';').forEach(css => {
           css = css.trim();
           if (css === '') return;
-          // console.log('css: ', css);
           const style = document.createElement('link');
+          style.id = el.name + '_css'
           style.href = css;
           style.setAttribute('rel', 'stylesheet');
           document.head.append(style);
