@@ -15,8 +15,13 @@ var mInpBut = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`);
+        if(!this.iEl) return
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         this.iEl.querySelector('.instance').innerHTML = this.iname;
         if (this.title) {
           this.iEl.querySelector('.title').innerHTML = this.title;
@@ -32,9 +37,9 @@ var mInpBut = (() => {
       // },
       // ----------------------------------------------
     };
+    ins.constructor();
     instances[instanceName] = ins;
-
-    setTimeout(function (ins) {ins.constructor();}, 0, ins);
+    // setTimeout(function (ins) {ins.constructor();}, 0, ins);
     return ins;
   };
   const getInstance = (instanceName) => {

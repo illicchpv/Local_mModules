@@ -19,10 +19,15 @@ var mInputV2 = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
+        if(!this.iEl) return
         this.iEl.querySelector('.input').setAttribute('id', `${moduleName}-${this.iname}`)
         this.iEl.querySelector('.label').setAttribute('for', `${moduleName}-${this.iname}`)
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         this.iEl.querySelector('.label').innerHTML = this.label
         this.iEl.querySelector('.input').setAttribute('type', this.type)
         this.iEl.querySelector('.input').value = this.value
@@ -43,15 +48,16 @@ var mInputV2 = (() => {
       // },
       // ----------------------------------------------
     }
+    ins.constructor();
     instances[instanceName] = ins
-
-    setTimeout(function (ins) { ins.constructor() }, 0, ins)
+    // setTimeout(function (ins) { ins.constructor() }, 0, ins)
     return ins
   }
   const getInstance = (instanceName) => {
     return instances[instanceName]
   }
   const getModuleInstance = (el) => {
+    debugger
     const inst = instances[el.closest('.' + moduleName).dataset.instance]
     // console.log('inst: ', inst);
 

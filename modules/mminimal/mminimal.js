@@ -14,8 +14,13 @@ var mminimal = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
+        if(!this.iEl) return
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         this.iEl.querySelector('.instance').innerHTML = this.iname
         this.iEl.querySelector('.counter').innerHTML = this.counter
         return this
@@ -27,9 +32,9 @@ var mminimal = (() => {
       },
       // ----------------------------------------------
     }
+    ins.constructor();
     instances[instanceName] = ins
-
-    setTimeout(function (ins) { ins.constructor() }, 0, ins)
+    // setTimeout(function (ins) { ins.constructor() }, 0, ins)
     return ins
   }
   const getInstance = (instanceName) => {

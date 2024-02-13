@@ -15,8 +15,13 @@ var mToggleV1 = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
+        if(!this.iEl) return
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         if(this.isChecked){
           this.iEl.querySelector('input').setAttribute('checked', '');
         }else{
@@ -37,9 +42,9 @@ var mToggleV1 = (() => {
       // },
       // ----------------------------------------------
     }
+    ins.constructor();
     instances[instanceName] = ins
-
-    setTimeout(function (ins) { ins.constructor() }, 0, ins)
+    // setTimeout(function (ins) { ins.constructor() }, 0, ins)
     return ins
   }
   const getInstance = (instanceName) => {

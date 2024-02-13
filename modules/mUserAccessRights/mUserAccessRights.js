@@ -25,6 +25,7 @@ var mUserAccessRights = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`);
+        if(!this.iEl) return
         nodeTemplate = stringToDomElement(this.iEl.querySelector('.nodeTemplate').innerHTML);
         // nodeTemplate.innerHTML += ' ';
         subNodeTemplate = stringToDomElement(this.iEl.querySelector('.subNodeTemplate').innerHTML);
@@ -33,6 +34,10 @@ var mUserAccessRights = (() => {
         this.iEl.querySelector('.subNodeTemplate').remove();
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         if(this.accountEmail === 'no@no.no'){
           this.iEl.querySelector('.title').innerHTML = this.noUserTitle || `${this.iname} ${this.accountEmail}`;
         }
@@ -215,9 +220,9 @@ var mUserAccessRights = (() => {
       },
       // ----------------------------------------------
     };
+    ins.constructor();
     instances[instanceName] = ins;
-
-    setTimeout(function (ins) {ins.constructor();}, 0, ins);
+    // setTimeout(function (ins) {ins.constructor();}, 0, ins);
     return ins;
   };
   const getInstance = (instanceName) => {

@@ -20,8 +20,13 @@ var mInputV1 = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
+        if(!this.iEl) return
       },
       render() {
+        if(!this.iEl){ 
+          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
+          this.constructor()
+        }
         this.iEl.querySelector('.label').innerHTML = this.label
         this.iEl.querySelector('.input').setAttribute('type', this.type)
         this.iEl.querySelector('.input').setAttribute('placeholder', this.placeholder)
@@ -43,9 +48,9 @@ var mInputV1 = (() => {
       // },
       // ----------------------------------------------
     }
+    ins.constructor();
     instances[instanceName] = ins
-
-    setTimeout(function (ins) { ins.constructor() }, 0, ins)
+    // setTimeout(function (ins) { ins.constructor() }, 0, ins)
     return ins
   }
   const getInstance = (instanceName) => {

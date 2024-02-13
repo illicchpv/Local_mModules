@@ -282,7 +282,7 @@ let IncludHtml = (function () {
             const str = params.extEl.innerHTML;
             params.extEl.innerHTML = str.replace(reg, r.to);
           } else {
-            console.warn('"from" и "to" обязательны в елементе "replace" ');
+            console.warn('"from" и "to" обязательны в элементе "replace" ');
           }
         } catch (e) {
           console.warn("ошибка при выполнении замены r:", r, "err:", e);
@@ -506,7 +506,7 @@ let IncludHtml = (function () {
     }
 
 
-    const arr = urlObj.hash.split('/') // при выбре "#!products/1" должны помечаться и "#!products"
+    const arr = urlObj.hash.split('/') // при выборе "#!products/1" должны помечаться и "#!products"
     if (arr.length > 1 && arr[1]) { // если в urlObj.hash присутствуют параметры помечаем все href начинающиеся с части hash до /
       const cmn = arr[0]
       if (cmn) {
