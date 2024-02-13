@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
-  <title>tst_pageTemplate</title>
+  <title>m_template_ test page</title>
 
   <!-- вставка для модулей начало -->
   <script>var isLocal = false; var isMainLocal = true;</script>
@@ -29,7 +29,7 @@
   <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
   <script>
     var __modulesList = [
-      {name: 'mminimal', js: modulesUrl + 'mminimal/mminimal.js', css: modulesUrl + 'mminimal/mminimal.css', },
+      {name: 'm_template_', js: modulesUrl + 'm_template_/m_template_.js', css: modulesUrl + 'm_template_/m_template_.css', },
     ];
   </script>
 
@@ -53,20 +53,28 @@
 
 <body>
   <div class="container">
-    <h1>test page. модуль: mminimal</h1>
+    <h1>test page. модуль: m_template_</h1>
   </div>
 
   <div class="container">
+
     <div class="incs" data-incs='{
-      incFile: modulesUrl + "mminimal/mminimal.html",
+      incFile: modulesUrl + "m_template_/m_template_.html",
       onLoadCallback(el){
         try{
-          const inst = initInstance({ module: mminimal, el: el, instName: `instance1`})
+          const inst = initInstance({ module: m_template_, el: el, 
+            // appName:`a1_`, 
+            instName: `instance1`})
+
+          //console.log(`${modulesUrl}${inst.mname}/res/`);
+          //el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./res/`, `${modulesUrl}${inst.mname}/res/`);
+          //console.log(`innerHTML:`, el.extEl.innerHTML.replaceAll(`./res/`, `${modulesUrl}${inst.mname}/res/`));
 
           inst.counter = 30;
         }catch(e){}
       },
-    }'>этот элемент будет заменён из mminimal.html</div>
+    }'>этот элемент будет заменён из m_template_.html</div>
+
   </div>
 </body>
 

@@ -128,7 +128,7 @@
         }
         function selectUser() {
           const mail = document.getElementById(`email`).value;
-          const url1 = `./res/a_${mail.split(`@`)[0]}_allow.json`;
+          const url1 = `./json-res/a_${mail.split(`@`)[0]}_allow.json`;
           console.log(`url1:`, url1);
           const inst = mUserAccessRights.getInstance(`instance1`);
           inst.title = `заголовок - права пользователя ${mail}`;
@@ -158,7 +158,7 @@
           inst.title = `Заголовок`;
           inst.noUserTitle = `Структура хранилища`;
           inst.open = `all`; // none hasCheck hasNoCheck
-          inst.urlConfig = `./res/a_config.json`; //  `./res/json_nodes_config.json`;
+          inst.urlConfig = `./json-res/a_config.json`; //  `./json-res/json_nodes_config.json`;
           inst.setStyle(`mUserAccessRightsV2.css`)
           setTimeout(()=>{
             //inst.title = `заголовок - права пользователя ${mail}`;
