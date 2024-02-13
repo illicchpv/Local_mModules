@@ -1,97 +1,66 @@
 /* mUserAccessRights.css */
 .mUserAccessRights {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 24;
-  padding: 10px;
-  border: 1px solid lightslategray;
-  background-color: white;
-  color: black;
-  box-sizing: border-box;
-
   max-width: 600px;
   min-width: 500px;
+  box-sizing: border-box;
 
   .title{
-    /* color: red; */
-    font-size: 25px;
-    font-weight: 400;
-    padding: 0;
-    margin: 0;
-    margin-bottom: 15px;
-    text-align: center;
+    font-size: 1.3em;
   }
   .box{
-    /* color: blue; */
   }
 
   details{
     margin-bottom: 3px;
 
     summary{
-      /* background-color: beige; */
-      padding: 3px;
-      cursor: pointer;
-      font-size: 20px;
-
-      list-style: none;
-
       display: flex;
       justify-content: start;
-      background-color: rgba(255, 213, 116, 0.22);
-      border-top-left-radius: 20px;
+      /* background-color: rgba(255, 213, 116, 0.05); */
       position: relative;
+      cursor: pointer;
 
       .summaryBox{
         width: 100%;
-        margin-top: 14px;
-
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 3px;
-        margin-bottom: 7px;
-        padding-right: 60px;
+        margin-top: .4em;
+        margin-left: 5px;
       }
       .nn{
-        /* background-color: red; */
-        font-size: 20px;
+        font-size: 1.2em;
+      }
+      .info{
+        display: flex;
+        gap: 3px;
       }
       .available{
-        color: lightgreen;
-        color: black;
         font-weight: 700;
       }
       .total{
-        color: darkgray;
+        margin-right: 10px;
       }
       label{
-        padding: 0 7px;
+        display: flex;
+        gap: 5px;
       }
       .rootCheck{
-        accent-color: rgb(136, 208, 131);
+        accent-color: rgb(192, 252, 188);
       }
 
     }
     summary::before{
-      content: '🌂 '; 
-      content: '📁 '; 
-      font-size: 30px;
-      /* position: absolute; */
+      content: '⯈'; /* ▼ ▼  ▶ ▶  ▼  ▲/▼ ◀/▶ ⯅⯇  */
+      font-size: 1.5em;
     }
     &[open] summary::before{
-      content: '☂️ '; 
-      content: '📂 '; 
-      font-size: 30px;
+      content: '⯆';
     }
     .innerBox{
-      margin-left: 80px;
-      border: 1px solid #eee;
-      background-color: rgba(255, 213, 116, 0.12);      
-      padding: 0 10px;
-      border-bottom-left-radius: 20px;
 
       p{
-        margin-top: 0px;
         display: flex;
         justify-content: flex-end;
         align-items: center;
