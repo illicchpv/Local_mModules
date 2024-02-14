@@ -3,38 +3,28 @@
 
 <head>
   <!-- http://aclive.ru/modules-tests/tst-mUserAccessRights.html -->
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>tst mUserAccessRights</title>
 
-  <!-- вставка для модулей начало -->
-  <script>var isLocal = false; var isMainLocal = true;</script>
-  <script src="./isLocal.js"></script>
+  <!-- вставка для модулей -->
+  <script src="/isLocal.js"></script>
   <script>
-    var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
-  </script>
-
-  <!-- local основные скрипты
-  -->
-  <script>isMainLocal = true;</script>
-  <script src="./modules/utils.js" defer></script>
-  <script src="./modules/IncludHtml.js" defer></script>
-  <script src="./modules/modulesLoader.js" defer></script>
-  <!-- host основные скрипты
-  <script>isMainLocal = false;</script>
-  <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
-  <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
-  <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
-  -->
-
-  <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
-  <script>
+    const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
+    console.log('modulesUrl: ', modulesUrl);
+    {
+      const s0 = '<' + 'script '; const s1 = '<' + '/script>';
+      document.write(s0 + 'src="' + modulesUrl + 'utils.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'IncludHtml.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
+    }
     var __modulesList = [
       {name: 'mUserAccessRights', js: modulesUrl + 'mUserAccessRights/mUserAccessRights.js', css: modulesUrl + 'mUserAccessRights/mUserAccessRights.css', },
     ];
   </script>
+  <!-- /вставка для модулей -->
 
   <style>
     body {
@@ -112,7 +102,7 @@
         <!-- <button onclick="reopenRoots()">↺</button> -->
       </span>
       <br>
-      <button type="button" onclick="selectUser()">OK</button> <span>user1-права заданы без *; user2 - для 'Другая' стоит *; user3 - стоит * для всего </span> 
+      <button type="button" onclick="selectUser()">OK</button> <span>user1-права заданы без *; user2 - для 'Другая' стоит *; user3 - стоит * для всего </span>
       <br>
       <button type="button" onclick="changeStyle1()">changeStyle1</button>
       <button type="button" onclick="changeStyle2()">changeStyle2</button>
@@ -135,13 +125,13 @@
           inst.urlUserAccess = url1;
           inst.setAccountEmail(mail);
         }
-        function changeStyle1(){
+        function changeStyle1() {
           const inst = mUserAccessRights.getInstance(`instance1`);
-          inst.setStyle('./modules/mUserAccessRights/mUserAccessRights.css')
+          inst.setStyle('./modules/mUserAccessRights/mUserAccessRights.css');
         }
-        function changeStyle2(){
+        function changeStyle2() {
           const inst = mUserAccessRights.getInstance(`instance1`);
-          inst.setStyle('mUserAccessRightsV2.css')
+          inst.setStyle('mUserAccessRightsV2.css');
         }
       </script>
     </p>
@@ -172,6 +162,33 @@
       },
     }'>этот элемент будет заменён из mUserAccessRights.html</div>
   </div>
+
+  <script>
+
+    document.addEventListener('modulesLoader.load.finish', (e) => { // происходит когда все модули загружены и готовы к работе
+      console.log('event - modulesLoader.load.finish');
+
+      const inst = mUserAccessRights.getInstance('instance1');
+      // вызов функции для загрузки структуры хранилища и прав пользователя 
+      inst.loadAccessRightsStart({
+        userId: '111', 
+        lang: 'ru', 
+        storUrl: '//act.anet.ru/', // url по которой будет запрос на получение moduleId и последующих 
+                                   // запросов на получение структуры и прав пользователя
+        getPsid: GetPsid, // указываем функцию которую будет вызывать модуль для получения psid. см. ниже
+      });
+
+    }, false);
+
+    // moduleId идентификатор модуля; cb - функция обратного вызова. ей передаётся полученные psid
+    // в случае ошибки генерировать exception - throw new Error('причина ошибки');
+    function GetPsid(moduleId, cb) { 
+      console.log('GetPsid for moduleId: ', moduleId);
+      if(cb) cb('psid')
+    }
+
+  </script>
+
 </body>
 
 </html>

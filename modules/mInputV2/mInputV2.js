@@ -57,10 +57,7 @@ var mInputV2 = (() => {
     return instances[instanceName]
   }
   const getModuleInstance = (el) => {
-    debugger
     const inst = instances[el.closest('.' + moduleName).dataset.instance]
-    // console.log('inst: ', inst);
-
     return inst
   }
   const renderAllInstance = () => {

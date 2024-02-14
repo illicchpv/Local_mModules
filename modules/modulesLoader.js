@@ -15,7 +15,7 @@ var __modulesLoader = (() => {
           css = css.trim();
           if (css === '') return;
           const style = document.createElement('link');
-          style.id = el.name + '_css'
+          style.id = el.name + '_css';
           style.href = css;
           style.setAttribute('rel', 'stylesheet');
           document.head.append(style);
@@ -99,6 +99,12 @@ function __modulesReady() {
     (defProps) => { // вызывается когда IncludHtml.doIncludAll всё сделал 
       setTimeout(function () {
         __modulesList.forEach(el => {el.module.renderAllInstance();});
+
+        setTimeout(() => {
+          const event = new Event("modulesLoader.load.finish");
+          document.dispatchEvent(event);
+        }, 1);
+        
       }, 1);
     }
   );

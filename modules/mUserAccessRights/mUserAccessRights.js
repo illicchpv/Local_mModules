@@ -25,7 +25,7 @@ var mUserAccessRights = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`);
-        if(!this.iEl) return
+        if (!this.iEl) return;
         nodeTemplate = stringToDomElement(this.iEl.querySelector('.nodeTemplate').innerHTML);
         // nodeTemplate.innerHTML += ' ';
         subNodeTemplate = stringToDomElement(this.iEl.querySelector('.subNodeTemplate').innerHTML);
@@ -34,53 +34,53 @@ var mUserAccessRights = (() => {
         this.iEl.querySelector('.subNodeTemplate').remove();
       },
       render() {
-        if(!this.iEl){ 
-          if(!document.querySelector(`.${moduleName}.${this.iname}`)) return
-          this.constructor()
+        if (!this.iEl) {
+          if (!document.querySelector(`.${moduleName}.${this.iname}`)) return;
+          this.constructor();
         }
-        if(this.accountEmail === 'no@no.no'){
+        if (this.accountEmail === 'no@no.no') {
           this.iEl.querySelector('.title').innerHTML = this.noUserTitle || `${this.iname} ${this.accountEmail}`;
         }
-        else{
+        else {
           this.iEl.querySelector('.title').innerHTML = this.title || `${this.iname} ${this.accountEmail}`;
         }
         const details = this.iEl.querySelectorAll('details');
 
         details.forEach((el, i) => {
-          const rootCheck = el.querySelector('.rootCheck')
+          const rootCheck = el.querySelector('.rootCheck');
           const checks = el.querySelectorAll('.subNodeCheck');
           const avail = el.closest('details').querySelector('.available');
           let cntAvail = 0;
           let st = true;
           checks.forEach(el2 => {
-            if(el2.checked) cntAvail++;
+            if (el2.checked) cntAvail++;
             else st = false;
           });
-          rootCheck.checked = st ? true : false
+          rootCheck.checked = st ? true : false;
           avail.innerText = cntAvail;
           // console.log(`rootCheck(${i}).checked: `, rootCheck.checked, st);
         });
 
         return this;
       },
-      reopenRoots(){
+      reopenRoots() {
         const details = this.iEl.querySelectorAll('details');
         details.forEach((el, i) => {
-          const rootCheck = el.querySelector('.rootCheck')
+          const rootCheck = el.querySelector('.rootCheck');
           const checks = el.querySelectorAll('.subNodeCheck');
           const avail = el.closest('details').querySelector('.available');
           let cntAvail = +avail.innerText;
           {
-            const detail =el;
-            if(this.open.toLowerCase() === 'none'){
+            const detail = el;
+            if (this.open.toLowerCase() === 'none') {
               detail.removeAttribute('open');
-            } 
-            else if(this.open.toLowerCase() === 'hascheck'){
-              if(cntAvail > 0) detail.setAttribute('open', true);
+            }
+            else if (this.open.toLowerCase() === 'hascheck') {
+              if (cntAvail > 0) detail.setAttribute('open', true);
               else detail.removeAttribute('open');
             }
-            else if(this.open.toLowerCase() === 'hasnocheck'){
-              if(cntAvail === 0) detail.setAttribute('open', true);
+            else if (this.open.toLowerCase() === 'hasnocheck') {
+              if (cntAvail === 0) detail.setAttribute('open', true);
               else detail.removeAttribute('open');
             }
             else {
@@ -88,7 +88,7 @@ var mUserAccessRights = (() => {
             }
           }
 
-        })
+        });
       },
       build() {
         const box = this.iEl.querySelector('.box');
@@ -123,14 +123,14 @@ var mUserAccessRights = (() => {
             });
 
             {
-              if(this.open.toLowerCase() === 'none'){
+              if (this.open.toLowerCase() === 'none') {
                 ;
-              } 
-              else if(this.open.toLowerCase() === 'hascheck'){
-                if(cntAvail > 0) detail.setAttribute('open', true);
               }
-              else if(this.open.toLowerCase() === 'hasnocheck'){
-                if(cntAvail === 0) detail.setAttribute('open', true);
+              else if (this.open.toLowerCase() === 'hascheck') {
+                if (cntAvail > 0) detail.setAttribute('open', true);
+              }
+              else if (this.open.toLowerCase() === 'hasnocheck') {
+                if (cntAvail === 0) detail.setAttribute('open', true);
               }
               else {
                 detail.setAttribute('open', true);
@@ -147,7 +147,7 @@ var mUserAccessRights = (() => {
         }
       },
       async setAccountEmail(email) {
-        if(email === 'no@no.no'){
+        if (email === 'no@no.no') {
           if (!this.url0) {
             console.error('mUserAccessRights -- url0!');
             debugger;
@@ -155,19 +155,19 @@ var mUserAccessRights = (() => {
           }
           this.accountEmail = email;
           {
-            const dl = async (arr) => { 
+            const dl = async (arr) => {
               const rez = await IncludHtml.doLoadUrls(arr);
               return rez;
-            }
+            };
             const rez = await dl([this.url0]);
             let config = JSON.parse(rez[0].txt);
-            if(!config.roots){
+            if (!config.roots) {
               config = formatConfigConvert(config, namePref = 'блок');
             }
             this.uarInfo = [config, {allowed: []}];
           }
         }
-        else{
+        else {
           if (!this.url0 || !this.url1) {
             console.error('mUserAccessRights -- url0 или url1 не заданы!');
             debugger;
@@ -176,19 +176,19 @@ var mUserAccessRights = (() => {
           this.accountEmail = email;
           // if (!this.uarInfoLoaded) 
           {
-            const dl = async (arr) => { 
+            const dl = async (arr) => {
               const rez = await IncludHtml.doLoadUrls(arr);
               // this.uarInfoLoaded = true;
               return rez;
-            }
+            };
             const rez = await dl([this.url0, this.url1]);
             let config = JSON.parse(rez[0].txt);
-            if(!config.roots){
+            if (!config.roots) {
               config = formatConfigConvert(config, namePref = 'блок');
             }
-            let allow = JSON.parse(rez[1].txt)
-            if(!allow.allowed){
-              allow = formatAccessConvert(config, allow)
+            let allow = JSON.parse(rez[1].txt);
+            if (!allow.allowed) {
+              allow = formatAccessConvert(config, allow);
             }
             this.uarInfo = [config, allow];
           }
@@ -202,21 +202,57 @@ var mUserAccessRights = (() => {
       },
       doOnChangeRoot(e, elSub) {
         const nodeCheckArr = elSub.closest('details').querySelectorAll('.subNodeCheck');
-        nodeCheckArr.forEach(el => el.checked = elSub.checked)
+        nodeCheckArr.forEach(el => el.checked = elSub.checked);
         this.render();
       },
-      setStyle(style){
-        const s = document.getElementById(moduleName+'_css')
-        if(s) {
-          if(style.indexOf('/') < 0) s.href  = s.href.substring(0,s.href.lastIndexOf('/')+1) + style;
-          else s.href  = style;
+      setStyle(style) {
+        const s = document.getElementById(moduleName + '_css');
+        if (s) {
+          if (style.indexOf('/') < 0) s.href = s.href.substring(0, s.href.lastIndexOf('/') + 1) + style;
+          else s.href = style;
         }
       },
-      set urlConfig(v){
+      set urlConfig(v) {
         this.url0 = v;
       },
-      set urlUserAccess(v){
+      set urlUserAccess(v) {
         this.url1 = v;
+      },
+      loadAccessRightsStart(params) {
+        const {userId, lang, storUrl, getPsid} = params;
+        console.log('loadAccessRightsStart params: ', params);
+        try {
+          // используя storUrl получаем moduleId
+          // ???
+          const moduleId = 'moduleId???';
+          // используя moduleId получаем psid
+          getPsid('moduleId', (psid) => {
+            console.log('getPsid: psid: ', psid);
+            debugger;
+            // запрашиваем инфо по блоку moduleId
+            this._getAllBlockInfo(psid, moduleId, lang, (blockInfo) => {
+              console.log('_getAllBlockInfo: blockInfo: ', blockInfo);
+              debugger;
+            });
+            // запрашиваем права пользователя
+            this._getUserAr(psid, moduleId, userId, lang, (userAr) => {
+              console.log('_getUserAr: userAr: ', userAr);
+              debugger;
+            });
+          });
+
+        } catch (e) {
+          console.error('loadAccessRightsStart -- catch(e):', e);
+          debugger
+        }
+      },
+      _getAllBlockInfo(psid, moduleId, lang, cb) {
+        console.log('_getAllBlockInfo psid, moduleId, lang, cb: ', psid, moduleId, lang, !!cb);
+        if (cb) cb('BlockInfo');
+      },
+      _getUserAr(psid, moduleId, userId, lang, cb) {
+        console.log('_getAllBlockInfo psid, moduleId, userId, lang, cb: ', psid, moduleId, userId, lang, !!cb);
+        if (cb) cb('UserAr');
       },
       // ----------------------------------------------
     };

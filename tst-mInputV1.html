@@ -8,26 +8,17 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <title>page-template</title>
 
-  <!-- вставка для модулей начало -->
-  <script>var isLocal = false; var isMainLocal = true;</script>
-  <script src="./isLocal.js"></script>
+  <!-- вставка для модулей -->
+  <script src="/isLocal.js"></script>
   <script>
-    var modulesUrl = isLocal ? './modules/' : '//aclive.ru/modules-tests/lib1/'
-  </script>
-  <!-- local основные скрипты
-  -->
-  <script>isMainLocal = true;</script>
-  <script src="./modules/utils.js" defer></script>
-  <script src="./modules/IncludHtml.js" defer></script>
-  <script src="./modules/modulesLoader.js" defer></script>
-  <!-- host основные скрипты
-  <script>isMainLocal = false;</script>
-  <script src="//aclive.ru/modules-tests/lib1/utils.js" defer></script>
-  <script src="//aclive.ru/modules-tests/lib1/IncludHtml.js" defer></script>
-  <script src="//aclive.ru/modules-tests/lib1/modulesLoader.js" defer></script>
-  -->
-  <script>console.log('isLocal: ', isLocal, 'isMainLocal:', isMainLocal) </script>
-  <script>
+    const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
+    console.log('modulesUrl: ', modulesUrl);
+    {
+      const s0 = '<' + 'script '; const s1 = '<' + '/script>';
+      document.write(s0 + 'src="' + modulesUrl + 'utils.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'IncludHtml.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
+    }
     var __modulesList = [ // перечисление используемых модулей
       {name: 'mInputV1', js: modulesUrl + 'mInputV1/mInputV1.js', css: modulesUrl + 'mInputV1/mInputV1.css', },
     ];

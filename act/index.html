@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="rosatom" />
+  <meta name="description" content="Analitical tool" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>&#x41F;&#x440;&#x43E;&#x444;&#x438;&#x43B;&#x44C; &#x43F;&#x43E;&#x43B;&#x44C;&#x437;&#x43E;&#x432;&#x430;&#x442;&#x435;&#x43B;&#x44F;</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
+  <!-- Custom CSS -->
+  <link href="//act.anet.ru/dist/css/style.min.css" rel="stylesheet" type="text/css" />
+  <link href="//act.anet.ru/dist/css/custom.min.css" rel="stylesheet" type="text/css" />
+  <!--link rel="stylesheet" type="text/css" href="ex.css"-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- вставка для модулей -->
+  <script src="/isLocal.js"></script>
+  <script>
+    const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
+    console.log('modulesUrl: ', modulesUrl);
+    {
+      const s0 = '<' + 'script '; const s1 = '<' + '/script>';
+      document.write(s0 + 'src="' + modulesUrl + 'utils.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'IncludHtml.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
+    }
+    var __modulesList = [
+      {name: 'mUserAccessRights', js: modulesUrl + 'mUserAccessRights/mUserAccessRights.js', css: modulesUrl + 'mUserAccessRights/mUserAccessRights.css', },
+    ];
+  </script>
+  <!-- /вставка для модулей -->
+
+</head>
+
+<body>
+  <!-- Main wrapper - style you can find in pages.scss -->
+  <!-- -------------------------------------------------------------- -->
+  <div>
+    <table width="100%" height="400px">
+      <tr>
+        <td colspan=2>
+          <div style="background:#025EA1; color:rgba(255,255,255,0.8); height:64px; text-align:center;padding-top:20px;">
+            <b>Демо</b>
+            <a href="http://act.anet.ru/Account/Login" target="_blank" style="margin-left: 20px; color: white;">(Login)</a>
+          </div>
+
+        </td>
+
+      </tr>
+      <tr>
+        <td valign="top" width="200px">
+          <div style="background:#025EA1; height:64px;color:rgba(255,255,255,0.8); height:100vh; padding-top:40px;">
+            <b>
+              <ul>
+                <li>О модуле</li>
+                <li>Демо</li>
+              </ul>
+            </b>
+          </div>
+        </td>
+
+        <td valign="top">
+          <div style="margin:20px;">
+            <h4 id="lab-pgCaption">Права пользователя</h4>
+
+
+
+            <div>
+              Язык:
+              <span style="margin-left:20px;">
+                <select id="lang" style="width:200px;">
+                  <option value="ru" data-noOfSeats="2">Русский</option>
+                  <option value="en" data-noOfSeats="2">English</option>
+                </select>
+              </span>
+            </div>
+
+            <div id="divUser" style="margin-top:20px;">
+              <label id="labusers-list" for="users-list">Выберите пользователя</label>
+              <select id="users-list" class="form-select-compact" style="width:250px; margin-right:10px;">
+                <option value="B4UOJePCEV0DQdLQEu3yGwQMwoC7XVkP3iVjog8nNM0" data-noOfSeats="2">chelovechische63@mail.ru</option>
+                <option value="CSo13754u3ABTecPYRB7TQ" data-noOfSeats="2">user@triniti.ru</option>
+              </select>
+            </div>
+
+            <div style="margin-top:20px;">
+              <button id="btnToken" type="button" onclick="GetPsid();" class="margin-top-20" style="margin-right:10px;margin-bottom:10px; border:none; padding:5px 10px; ">
+                Получить psid
+              </button>
+            </div>
+
+            <div>
+              <label style="margin-right:10px;">Psid:</label>
+              <span style="margin-left:20px;"><label id="lab-psid" style="display:table-cell; "></label></span>
+            </div>
+            <!-- a1_instance1 -->
+            <div class="incs arClass" data-incs='{
+         incFile: modulesUrl + "mUserAccessRights/mUserAccessRights.html" ,
+         onLoadCallback(el){
+         try{
+         const inst=initInstance({ module: mUserAccessRights, el: el,
+         instName: `instance1`})
+         inst.title=`Заголовок`;
+         inst.open=`all`; // none hasCheck hasNoCheck
+         //inst.url0 =`./json_nodes_config.json`;
+         inst.url0=`http://aclive.ru/modules-tests/lib1/json-res/a_config.json`;
+         setTimeout(()=>
+        {
+        inst.setAccountEmail(`no@no.no`);
+        }, 10);
+        }catch(e){
+        console.error(`mUserAccessRights.onLoadCallback e: `, e);
+        }
+        },
+        }'>этот элемент будет заменён из mUserAccessRights.html
+            </div>
+            <div id="divGetBlocks" style="margin-top:40px;">
+              <button id="btnGetBlocks" type="button" onclick="GetAllBlocksInfo();" style="margin-right:10px; margin-bottom:10px; border:none; padding:5px 10px;">
+                Получить список блоков
+              </button>
+              <br />
+              <div><span id="lab-blocks" style="margin-right:10px;"></span> </div>
+            </div>
+
+            <div id="divGetAr" style="margin-top:40px;">
+              <button id="btnGetAr" type="button" onclick="GetUserAR();" style="margin-right:10px; margin-bottom:10px; border:none; padding:5px 10px;">
+                Получить права пользователя
+              </button>
+              <br />
+              <div><label id="lab-ar" style="margin-right:10px;"></label> </div>
+            </div>
+
+            <div id="divSaveAr" style="margin-top:40px;">
+              Права пользователя: <input id="tbUserAR" size="100" type="text" value="" />
+            </div>
+
+            <div id="divSaveAr" style="margin-top:20px;">
+              <button id="btnSaveAr" type="button" onclick="SaveUserAR();" style="margin-right:10px;margin-bottom:10px; border:none; padding:5px 10px">
+                Сохранить права пользователя
+              </button>
+            </div>
+
+            <div style="margin-top:20px;">
+              <div><label id="tErr" style="width:100%; height:24px; " class="text-danger" /></div>
+              <div><label id="tMsg" style="width:100%; height:24px; " /></div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <script>
+    let curLang = "ru";
+    var modId = "74c02d90-0cc0-44e5-8d0b-99200d1dfe59";
+    document.title = "Демо Права пользователя";
+  </script>
+
+  <script>
+    function GetPsid() {
+      $("#lab-psid").text("");
+      $("#tErr").text("");
+      $("#tMsg").text("");
+
+      let url = "/Account/GetModuleXParam";
+      let fdata = "moduleId=" + modId;
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: fdata,
+        dataType: "json",
+        error: function (returnval) {
+          console.error('GetPsid GetModuleXParam returnval: ', returnval);
+          debugger
+          // writeServiceErrorMsg2Console("GetModuleXParam", CONST_ERROR, "login = " + login + ",  returnval = " + returnval.statusText);
+          $("#tErr").text(returnval.statusText);
+          return;
+        },
+        success: function (resp) {
+          if (resp != null) {
+            if (resp.err === "") {
+              $("#lab-psid").text(resp.par);
+              return;
+            }
+
+            $("#tErr").text(resp.err);
+            return;
+          }
+          else {
+            $("#tErr").text("resp = null");
+          }
+        }
+      });
+    }
+
+    function GetAllBlocksInfo() {
+      $("#lab-ar").text("");
+      $("#tErr").text("");
+      $("#tMsg").text("");
+
+      var url1 = "/Home/GetAllBlocksInfo";
+      var fdata = "psid=" + $("#lab-psid").text()
+        + "&mid=" + modId
+        + "&lang=" + $("#lang")[0].value
+        ;
+      $.ajax({
+        url: url1,
+        type: "POST",
+        data: fdata,
+        dataType: "json",
+        error: function (returnval) {
+          console.error('GetAllBlocksInfo GetAllBlocksInfo returnval: ', returnval);
+          $("#tErr").text("ERROR:" + returnval);
+          debugger
+        },
+        success: function (resp) {
+          if (resp == null) {
+            $("#tErr").text("resp == null");
+            return;
+          }
+          if (resp.err == "auierr810") {
+            $("#tErr").text("resp.err = auierr810");
+            return;
+          }
+
+          $("#lab-blocks")[0].outerText = (JSON.stringify(resp));
+          return;
+        }
+      });
+    }
+
+    function GetUserAR() {
+      $("#lab-ar").text("");
+      $("#tErr").text("");
+      $("#tMsg").text("");
+
+      var url1 = "/Account/GetUserAR";
+      var fdata = "psid=" + $("#lab-psid").text()
+        + "&mid=" + modId
+        + "&userId=" + $("#users-list")[0].value
+        ;
+      $.ajax({
+        url: url1,
+        type: "POST",
+        data: fdata,
+        dataType: "json",
+        error: function (returnval) {
+          console.error('GetUserAR GetUserAR returnval: ', returnval);
+          $("#tErr").text("ERROR:" + returnval);
+          debugger
+        },
+        success: function (resp) {
+          if (resp == null) {
+            $("#tErr").text("resp == null");
+            return;
+          }
+          if (resp.err == "auierr810") {
+            $("#tErr").text("resp.err = auierr810");
+            return;
+          }
+
+          $("#lab-ar").text("" + resp.ar);
+          return;
+        }
+      });
+    }
+
+
+    function SaveUserAR() {
+      $("#lab-ar").text("");
+      $("#tErr").text("");
+      $("#tMsg").text("");
+      $("#tbUserAR")[0].value = $("#tbUserAR")[0].value.replaceAll("\"", "");
+
+      var url1 = "/Account/SaveUserAR";
+      var fdata = "psid=" + $("#lab-psid").text()
+        + "&mid=" + modId
+        + "&userId=" + $("#users-list")[0].value
+        + "&ar=" + $("#tbUserAR")[0].value
+        ;
+      $.ajax({
+        url: url1,
+        type: "POST",
+        data: fdata,
+        dataType: "json",
+        error: function (returnval) {
+          console.error('SaveUserAR SaveUserAR returnval: ', returnval);
+          $("#tErr").text("ERROR:" + returnval);
+          debugger
+        },
+        success: function (resp) {
+          if (resp == null) {
+            $("#tErr").text("resp == null");
+            return;
+          }
+          if (resp.err == "auierr810") {
+            $("#tErr").text("resp.err = auierr810");
+            return;
+          }
+
+          $("#tbUserAR")[0].value = resp.ar;
+          $("#tMsg").text("Права сохранены");
+          return;
+        }
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>
