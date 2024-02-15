@@ -11,6 +11,7 @@
   <!-- вставка для модулей -->
   <script src="/isLocal.js"></script>
   <script>
+    if(typeof isLocal === 'undefined') var isLocal = false;
     const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
     console.log('modulesUrl: ', modulesUrl);
     {

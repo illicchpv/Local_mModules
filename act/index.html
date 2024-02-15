@@ -29,6 +29,7 @@
   <!-- вставка для модулей -->
   <script src="/isLocal.js"></script>
   <script>
+    if(typeof isLocal === 'undefined') var isLocal = false;
     const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
     console.log('modulesUrl: ', modulesUrl);
     {
@@ -187,7 +188,7 @@
         dataType: "json",
         error: function (returnval) {
           console.error('GetPsid GetModuleXParam returnval: ', returnval);
-          debugger
+          debugger;
           // writeServiceErrorMsg2Console("GetModuleXParam", CONST_ERROR, "login = " + login + ",  returnval = " + returnval.statusText);
           $("#tErr").text(returnval.statusText);
           return;
@@ -227,7 +228,7 @@
         error: function (returnval) {
           console.error('GetAllBlocksInfo GetAllBlocksInfo returnval: ', returnval);
           $("#tErr").text("ERROR:" + returnval);
-          debugger
+          debugger;
         },
         success: function (resp) {
           if (resp == null) {
@@ -263,7 +264,7 @@
         error: function (returnval) {
           console.error('GetUserAR GetUserAR returnval: ', returnval);
           $("#tErr").text("ERROR:" + returnval);
-          debugger
+          debugger;
         },
         success: function (resp) {
           if (resp == null) {
@@ -302,7 +303,7 @@
         error: function (returnval) {
           console.error('SaveUserAR SaveUserAR returnval: ', returnval);
           $("#tErr").text("ERROR:" + returnval);
-          debugger
+          debugger;
         },
         success: function (resp) {
           if (resp == null) {

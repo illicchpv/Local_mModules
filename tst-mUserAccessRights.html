@@ -12,6 +12,7 @@
   <!-- вставка для модулей -->
   <script src="/isLocal.js"></script>
   <script>
+    if(typeof isLocal === 'undefined') var isLocal = false;
     const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
     console.log('modulesUrl: ', modulesUrl);
     {
@@ -138,6 +139,7 @@
   </div>
 
   <div class="container">
+
     <div class="incs arClass" data-incs='{
       incFile: modulesUrl + "mUserAccessRights/mUserAccessRights.html",
       onLoadCallback(el){
@@ -161,6 +163,7 @@
         }
       },
     }'>этот элемент будет заменён из mUserAccessRights.html</div>
+    
   </div>
 
   <script>
