@@ -92,3 +92,54 @@ function formatAccessConvert(cfg, ar) {
   }
   return rez;
 }
+
+const getPostRez = function (url, postObj, rezultCallback) {
+  try {
+    postObj = (typeof (postObj) === 'string') ? JSON.parse(postObj) : postObj;
+    const postBody = JSON_to_URLEncoded(postObj);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'cross-site',
+        'Accept': 'application/json',
+      },
+      body: postBody,
+    })
+      .then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        if(!json){
+          return rezultCallback('rezult is empty!', false);
+        }
+        if (!json.err) {
+          if (rezultCallback) rezultCallback(false, json);
+        } else {
+          if (rezultCallback) rezultCallback(json.err, false);
+        }
+      }).catch(function (ex) {
+        if (rezultCallback) rezultCallback(ex, false);
+      });
+  } catch (ex) {
+    if (rezultCallback) rezultCallback(ex, false);
+  }
+};
+
+function JSON_to_URLEncoded(element, key, list) {
+  var list = list || [];
+  if (typeof (element) == 'object') {
+    for (var idx in element)
+      JSON_to_URLEncoded(element[idx], key ? key + '[' + idx + ']' : idx, list);
+  } else {
+    list.push(key + '=' + encodeURIComponent(element));
+  }
+  return list.join('&');
+}
+
+function objToBase64(obj){
+  return btoa(JSON.stringify(obj))
+}
+function objFromBase64(b64){
+  return JSON.parse(atob(b64))
+}
