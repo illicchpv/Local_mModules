@@ -20,12 +20,15 @@
     }'>этот элемент будет заменён из mInputV1.html</div>
 -->
 <label id="extId" class="mInputV1">
+  <span>
+    <img src="./m_resurs/cc.svg" alt="">
     <span class="label">mInputV1</span>
-    <input class="input" type="text" 
-        autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"
-        placeholder="text"
-        value=""
-        oninput="mInputV1.getModuleInstance(this).doOnInput(event, this)"
-        onchange="mInputV1.getModuleInstance(this).doOnChange(event, this)"
-    >
+  </span>
+  <input class="input" type="text" 
+    autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"
+    placeholder="text"
+    value=""
+    oninput="mInputV1.getModuleInstance(this).doOnInput(event, this)"
+    onchange="mInputV1.getModuleInstance(this).doOnChange(event, this)"
+  >
 </label>

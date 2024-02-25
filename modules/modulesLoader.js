@@ -18,6 +18,7 @@ var __modulesLoader = (() => {
           style.id = el.name + '_css';
           style.href = css;
           style.setAttribute('rel', 'stylesheet');
+          style.setAttribute('type', 'text/css');
           document.head.append(style);
         });
       });
@@ -104,7 +105,7 @@ function __modulesReady() {
           const event = new Event("modulesLoader.load.finish");
           document.dispatchEvent(event);
         }, 1);
-
+        
       }, 1);
     }
   );
@@ -115,13 +116,30 @@ function initInstance({module, el, appName, instName}) {
   const iName = appName + instName;
   const inst = module.createInstance(iName);
   if (appName) el.extEl.dataset.app = appName;
-  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${inst.mname}/m_resurs/`);
+  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${module.moduleName}/m_resurs/`);
   if (appName) inst.aname = appName;
   el.extEl.dataset.instance = iName;
   el.extEl.classList.add(iName);
   return inst;
 }
+//  первый новый вариант:
+// вся инициализация и подготовка html происходит после вставки html в документ
+function initInstanceAfterLoadHtml({module, el, appName, instName}) {
+  appName = !appName ? '' : appName;
+  const iName = appName + instName;
+  el.docEl.innerHTML = el.docEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${module.moduleName}/m_resurs/`);
+  if (appName) el.docEl.dataset.app = appName;
+  el.docEl.dataset.instance = iName;
+  el.docEl.classList.add(iName);
+  const inst = module.createInstance(iName);
+  if (appName) inst.aname = appName;
+  return inst;
+}
 
+// второй новый вариант
+// можно разбить загрузку на 2 этапа.
+// 1 - подготовка вставляемого html. происходит в onLoadCallback
+// 2 - инициализация экземпляра модуля. происходит в callbackAfterLoadHtml
 function initInstHtml({module, el, appName, instName}) {
   appName = !appName ? '' : appName;
   const iName = appName + instName;
@@ -141,3 +159,4 @@ function initInst(el) { // {module, el, appName, instName}
   el.iName = null;
   return inst;
 }
+

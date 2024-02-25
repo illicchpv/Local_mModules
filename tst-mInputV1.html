@@ -71,7 +71,27 @@
         } catch (e) {}
       },
       */
-      // новый вариант
+      /*
+      // первый новый вариант
+      callbackAfterLoadHtml(el){
+        try {
+          const inst = initInstanceAfterLoadHtml({ module: mInputV1, el: el, instName: `instance1`})
+          inst.type = "text"
+          inst.placeholder = "ваше имя"
+          inst.value = "ффф"
+          inst.label = "Имя:"
+          inst.onInput = (e, inst) => {
+            console.log(inst.iname, "onInput", e.value);
+          }
+          inst.onChange = (e) => {
+            console.log(inst.iname, "onChange", e);
+          }
+        } catch (e) {}
+      },
+      */
+      /*
+      */
+      // второй новый вариант
       onLoadCallback(el){
         try {
           initInstHtml({ module: mInputV1, el: el, 
@@ -81,7 +101,7 @@
           debugger
         }
       },
-      afterLoadCallback(el){
+      callbackAfterLoadHtml(el){
         try {
           const inst = initInst(el)
           inst.type = "text"

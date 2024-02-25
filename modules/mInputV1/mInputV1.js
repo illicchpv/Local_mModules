@@ -20,7 +20,7 @@ var mInputV1 = (() => {
       gmi: __modulesLoader.getModInst, // const someInstance = this.gmi('moduleName.instanceName')
       constructor() {
         this.iEl = document.querySelector(`.${moduleName}.${this.iname}`)
-        if(!this.iEl) return
+        if(!this.iEl){ console.warn(`в конструкторе ${moduleName} не найден корневой элемент`); return}
       },
       render() {
         if(!this.iEl){ 

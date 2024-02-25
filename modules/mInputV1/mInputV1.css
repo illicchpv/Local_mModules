@@ -18,6 +18,12 @@
     flex-shrink: 1;
   }
 
+  span{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   .input {
     font-family: inherit;
     font-size: inherit;

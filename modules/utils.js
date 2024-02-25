@@ -3,7 +3,7 @@ function stringToDomElement(str) {
   const d = el.body.firstChild; // el.documentElement;
   // console.log('d: ', d.outerHTML);
   // debugger
-  return d
+  return d;
 }
 
 function getRndIntInclusive(n, m, lg) {
@@ -94,36 +94,32 @@ function formatAccessConvert(cfg, ar) {
 }
 
 const getPostRez = function (url, postObj, rezultCallback) {
-  try {
-    postObj = (typeof (postObj) === 'string') ? JSON.parse(postObj) : postObj;
-    const postBody = JSON_to_URLEncoded(postObj);
-    fetch(url, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'cross-site',
-        'Accept': 'application/json',
-      },
-      body: postBody,
-    })
-      .then(function (response) {
-        return response.json();
-      }).then(function (json) {
-        if(!json){
-          return rezultCallback('rezult is empty!', false);
-        }
-        if (!json.err) {
-          if (rezultCallback) rezultCallback(false, json);
-        } else {
-          if (rezultCallback) rezultCallback(json.err, false);
-        }
-      }).catch(function (ex) {
-        if (rezultCallback) rezultCallback(ex, false);
-      });
-  } catch (ex) {
-    if (rezultCallback) rezultCallback(ex, false);
-  }
+  postObj = (typeof (postObj) === 'string') ? JSON.parse(postObj) : postObj;
+  const postBody = JSON_to_URLEncoded(postObj);
+  fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': 'cross-site',
+      'Accept': 'application/json',
+    },
+    body: postBody,
+  })
+    .then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      if (!json) {
+        return rezultCallback('rezult is empty!', false);
+      }
+      if (!json.err) {
+        if (rezultCallback) rezultCallback(false, json);
+      } else {
+        if (rezultCallback) rezultCallback(json.err, false);
+      }
+    }).catch(function (ex) {
+      if (rezultCallback) rezultCallback(ex.toString(), false);
+    });
 };
 
 function JSON_to_URLEncoded(element, key, list) {
@@ -137,9 +133,19 @@ function JSON_to_URLEncoded(element, key, list) {
   return list.join('&');
 }
 
-function objToBase64(obj){
-  return btoa(JSON.stringify(obj))
+function objToBase64(obj) {
+  return btoa(JSON.stringify(obj));
 }
-function objFromBase64(b64){
-  return JSON.parse(atob(b64))
+function objFromBase64(b64) {
+  return JSON.parse(atob(b64));
 }
+
+function jsonToBase64(object) {
+  const json = JSON.stringify(object);
+  return Buffer.from(json).toString("base64");
+}
+function base64ToJson(base64String) {
+  const json = Buffer.from(base64String, "base64").toString();
+  return JSON.parse(json);
+}
+
