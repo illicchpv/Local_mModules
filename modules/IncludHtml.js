@@ -359,6 +359,19 @@ let IncludHtml = (function () {
       }
     }
 
+    const cb9 = params.afterLoadCallback;
+    if (cb9) {
+      const handler = (typeof (cb9) === 'function') ? cb9 : eval(`(p)=>{ ${cb9}(p); }`);
+      Object.assign(params, { routePage: routes['%routePage%'], pageParams: routes['%pageParams%'], })
+      try {
+        handler(params);
+        // setTimeout(() => handler(params.docEl), 1);
+        // handler(params.docEl)
+      } catch (e) {
+        console.warn("catch error in call " + cb + "(params)", e);
+      }
+    }
+
     doContinue(doContinue);
     // _doIncludAll();
   }

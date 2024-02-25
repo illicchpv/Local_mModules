@@ -104,7 +104,7 @@ function __modulesReady() {
           const event = new Event("modulesLoader.load.finish");
           document.dispatchEvent(event);
         }, 1);
-        
+
       }, 1);
     }
   );
@@ -119,5 +119,25 @@ function initInstance({module, el, appName, instName}) {
   if (appName) inst.aname = appName;
   el.extEl.dataset.instance = iName;
   el.extEl.classList.add(iName);
+  return inst;
+}
+
+function initInstHtml({module, el, appName, instName}) {
+  appName = !appName ? '' : appName;
+  const iName = appName + instName;
+  if (appName) el.extEl.dataset.app = appName;
+  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${module.moduleName}/m_resurs/`);
+  el.extEl.dataset.instance = iName;
+  el.extEl.classList.add(iName);
+  el.module = module;
+  el.appName = appName;
+  el.iName = iName;
+}
+function initInst(el) { // {module, el, appName, instName}
+  const inst = el.module.createInstance(el.iName);
+  if (el.appName) inst.aname = el.appName;
+  el.module = null;
+  el.appName = null;
+  el.iName = null;
   return inst;
 }

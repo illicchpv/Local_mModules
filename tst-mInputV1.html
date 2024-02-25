@@ -11,7 +11,7 @@
   <!-- вставка для модулей -->
   <script src="/isLocal.js"></script>
   <script>
-    if(typeof isLocal === 'undefined') var isLocal = false;
+    if (typeof isLocal === 'undefined') var isLocal = false;
     const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
     console.log('modulesUrl: ', modulesUrl);
     {
@@ -53,6 +53,7 @@
     <!-- вставка самого модуля -->
     <div class="incs" data-incs='{
       incFile: modulesUrl + "mInputV1/mInputV1.html",
+      /* старый вариант
       onLoadCallback(el){
         try {
           const inst = initInstance({ module: mInputV1, el: el, instName: `instance1`})
@@ -69,11 +70,41 @@
           }
         } catch (e) {}
       },
+      */
+      // новый вариант
+      onLoadCallback(el){
+        try {
+          initInstHtml({ module: mInputV1, el: el, 
+            // appName: ``,
+            instName: `instance1`})
+        } catch (e) {
+          debugger
+        }
+      },
+      afterLoadCallback(el){
+        try {
+          const inst = initInst(el)
+          inst.type = "text"
+          inst.placeholder = "ваше имя"
+          inst.value = ""
+          inst.label = "Имя:"
+          inst.onInput = (e, inst) => {
+            console.log(inst.iname, "onInput", e.value);
+          }
+          inst.onChange = (e) => {
+            console.log(inst.iname, "onChange", e);
+          }
+        } catch (e) {
+          debugger
+        }
+      },
     }'>этот элемент будет заменён из mInputV1.html</div>
+    <script>
+    </script>
     <br>
     <br>
     <br>
-    <div class="incs" data-incs='{
+    <!-- <div class="incs" data-incs='{
       incFile: modulesUrl + "mInputV1/mInputV1.html",
       onLoadCallback(el){
         try {
@@ -91,7 +122,7 @@
           }
         } catch (e) {}
       },
-    }'>этот элемент будет заменён из mInputV1.html</div>
+    }'>этот элемент будет заменён из mInputV1.html</div> -->
   </div>
 </body>
 
