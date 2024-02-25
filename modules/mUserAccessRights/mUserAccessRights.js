@@ -33,6 +33,7 @@ var mUserAccessRights = (() => {
         this.iEl.querySelector('.nodeTemplate').remove();
         this.iEl.querySelector('.subNodeTemplate').remove();
       },
+      ar: [],
       render() {
         if (!this.iEl) {
           if (!document.querySelector(`.${moduleName}.${this.iname}`)) return;
@@ -46,21 +47,32 @@ var mUserAccessRights = (() => {
         }
         const details = this.iEl.querySelectorAll('details');
 
+        this.ar = [];
         details.forEach((el, i) => {
           const rootCheck = el.querySelector('.rootCheck');
           const checks = el.querySelectorAll('.subNodeCheck');
           const avail = el.closest('details').querySelector('.available');
+          const arSt = {
+            name: el.dataset.st,
+            allow: [],
+          };
           let cntAvail = 0;
           let st = true;
           checks.forEach(el2 => {
-            if (el2.checked) cntAvail++;
+            if (el2.checked) {
+              cntAvail++;
+              arSt.allow.push(el2.dataset.bl);
+            }
             else st = false;
           });
           rootCheck.checked = st ? true : false;
           avail.innerText = cntAvail;
+          if (rootCheck.checked) arSt.allow = ['*'];
           // console.log(`rootCheck(${i}).checked: `, rootCheck.checked, st);
+          this.ar.push(arSt);
         });
 
+        console.log('this.ar: ', this.ar);
         return this;
       },
       reopenRoots() {
@@ -98,8 +110,9 @@ var mUserAccessRights = (() => {
         try {
           const [config, allowed] = this.uarInfo;
           config.roots.forEach(elRoots => {
-            if (elRoots.root <= 0) return;
+            if (!elRoots.root || elRoots.root <= 0) return;
             const detail = nodeTemplate.cloneNode(true);
+            detail.dataset.st = elRoots.root;
 
             detail.querySelector('.nn').innerHTML = elRoots.name;
             const rootSubNodes = config.subNodes.filter(ell => ell.root === elRoots.root).sort((a, b) => a.subNode - b.subNode);
@@ -112,10 +125,12 @@ var mUserAccessRights = (() => {
             let cntAvail = 0;
             rootSubNodes.forEach(ell => {
               const nsn = subNodeTemplate.cloneNode(true);
+              // nsn.dataset.bl = ell.subNode;
               const id = this.mname + '_' + this.iname + '_' + ell.root + '_' + ell.subNode;
               nsn.querySelector('label').innerHTML = ell.name;
               nsn.querySelector('label').setAttribute("for", id);
               nsn.querySelector('input').setAttribute("id", id);
+              nsn.querySelector('input').dataset.bl = ell.subNode;
               const e = allowedRootSubNodes.find(el3 => el3.subNode === '*' || el3.subNode === ell.subNode);
               if (e) {nsn.querySelector('input').setAttribute("checked", true); cntAvail++;}
 
@@ -228,22 +243,23 @@ var mUserAccessRights = (() => {
           // используя moduleId получаем psid
           getPsid('moduleId', (psid) => {
             console.log('getPsid: psid: ', psid);
-            debugger;
-            // запрашиваем инфо по блоку moduleId
+            // debugger;
+            // после получения psid moduleId не надо использовать в запросах !!!
+            // запрашиваем инфо по блоку moduleId + !!! URL ---moduleId
             this._getAllBlockInfo(psid, moduleId, lang, (blockInfo) => {
               console.log('_getAllBlockInfo: blockInfo: ', blockInfo);
-              debugger;
+              // debugger;
             });
-            // запрашиваем права пользователя
+            // запрашиваем права пользователя + !!! URL  ??? lang ---moduleId
             this._getUserAr(psid, moduleId, userId, lang, (userAr) => {
               console.log('_getUserAr: userAr: ', userAr);
-              debugger;
+              // debugger;
             });
           });
 
         } catch (e) {
           console.error('loadAccessRightsStart -- catch(e):', e);
-          debugger
+          debugger;
         }
       },
       _getAllBlockInfo(psid, moduleId, lang, cb) {
