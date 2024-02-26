@@ -140,15 +140,6 @@ function objFromBase64(b64) {
   return JSON.parse(atob(b64));
 }
 
-function jsonToBase64(object) {
-  const json = JSON.stringify(object);
-  return Buffer.from(json).toString("base64");
-}
-function base64ToJson(base64String) {
-  const json = Buffer.from(base64String, "base64").toString();
-  return JSON.parse(json);
-}
-
 /* templFill пример использования:
   const rez = templFill("a[$\{a}] b[$\{b}] c.cc[$\{c.cc}]", params);
 */
