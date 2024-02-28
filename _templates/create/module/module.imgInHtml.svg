@@ -1,0 +1,19 @@
+---
+to: <%= absPath %>/m_resurs/imgInHtml.svg
+---
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133 61" height="30">
+  <rect x="0" y="0" width="133" height="61" fill="none"></rect>
+  <g stroke-linecap="round" transform="translate(10 10) rotate(0 56.5 20.5)">
+    <path d="M10.25 0 C34.55 -1.38, 58.05 -2.64, 102.75 0 M10.25 0 C46.19 0.71, 84.34 -0.06, 102.75 0 M102.75 0 C109.44 -1.06, 113.93 2.73, 113 10.25 M102.75 0 
+    C110.32 -2.11, 111.44 2.15, 113 10.25 M113 10.25 C112.33 15.92, 111.49 19.16, 113 30.75 M113 10.25 C113.96 19.1, 112.2 26.56, 113 30.75 M113 30.75 
+    C112.47 37.22, 111.2 41.71, 102.75 41 M113 30.75 C113.32 38.91, 107.39 41.95, 102.75 41 M102.75 41 C67.2 42.48, 36.85 41.26, 10.25 41 M102.75 41 C79.53 
+    39.44, 53.72 40.12, 10.25 41 M10.25 41 C4.68 42.1, -1.56 36.01, 0 30.75 M10.25 41 C5.52 41, -1.78 36.15, 0 30.75 M0 30.75 C2.09 25.72, -0.31 20.62, 0 10.25 
+    M0 30.75 C-0.48 24.68, 0.97 19.35, 0 10.25 M0 10.25 C0.33 3.9, 3.68 -0.22, 10.25 0 M0 10.25 C-1.07 2.34, 5.15 1.09, 10.25 0" 
+    stroke="black" stroke-width="2" fill="none"></path>
+  </g>
+  <g transform="translate(20.23004150390625 18) rotate(0 46.26995849609375 12.5)">
+    <text x="46.26995849609375" y="0" font-family="Virgil, Segoe UI Emoji" font-size="18px" fill="green" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="text-before-edge"
+    >img in html</text>
+  </g>
+</svg>

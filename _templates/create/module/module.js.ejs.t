@@ -1,12 +1,16 @@
+---
+to: <%= absPath %>/<%= component_name %>.js
+---
+
 {
-  const mn = 'm_template2_';
+  const mn = '<%= component_name %>';
   eval(`
     var ${mn} = new ${mn}fn('${mn}');
     ${mn}.forModulesLoader(${mn});
     ${mn}.moduleName = '${mn}';
   `);
 }
-function m_template2_fn(mn) {
+function <%= component_name %>fn(mn) {
   mBase.call(this); // отнаследовать
   this.setModuleName(mn);
 
