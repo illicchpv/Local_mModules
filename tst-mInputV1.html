@@ -103,7 +103,7 @@
       },
       callbackAfterLoadHtml(el){
         try {
-          const inst = initInst(el)
+          const inst = initInstObj(el)
           inst.type = "text"
           inst.placeholder = "ваше имя"
           inst.value = ""

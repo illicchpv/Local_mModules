@@ -1,0 +1,32 @@
+<!-- 
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "m_template2_/m_template2_.html",
+      callbackAfterLoadHtml(el){
+        try {
+          const inst = initInstanceAfterLoadHtml({
+            module: m_template2_, el: el,
+            // appName:`a1_`, // указывается в случае модуля-приложения(состоит из нескольких модулей)
+            instName: `instance1`
+          });
+          inst.counter = 30;
+        } catch (e) { }
+      },
+    }'>этот элемент будет заменён из m_template2_.html</div>
+-->
+<div id="extId" class="m_template2_">
+  <style>
+    
+  </style>
+  <h3>m_template2_.<span class="instance">instance</span> </h3>
+  <div class="box">
+    <img src="./m_resurs/imgInHtml.svg" alt="cc.svg">
+    
+    <div class="box__row">
+      <span>
+        counter: 
+        <span class="counter">0000</span>
+      </span>
+      <button onclick="m_template2_.getModuleInstance(this).incCounter()">press for counter++</button>
+    </div>
+  </div>
+</div>

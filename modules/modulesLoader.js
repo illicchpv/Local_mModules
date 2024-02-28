@@ -1,3 +1,69 @@
+function mBase() {
+  let moduleName = 'mBase';
+  const instances = {};
+
+  this.getModuleName = function () {
+    return moduleName;
+  };
+  this.setModuleName = function (v) {
+    moduleName = v;
+  };
+  // this.createInstance = function (instanceName) {
+  //   debugger
+  //   if (instances[instanceName]) throw new Error(`instance: '${moduleName}.${instanceName}' already exist!`);
+  //   const ins = {
+  //     mname: moduleName,
+  //     iname: instanceName,
+  //   };
+  //   instances[instanceName] = ins;
+  //   return ins;
+  // };
+  this.setInstance = function (instanceName, ins) {
+    instances[instanceName] = ins;
+    return ins;
+  };
+  this.getInstance = function (instanceName) {
+    const inst = instances[instanceName];
+    return inst;
+  };
+  this.getModuleInstance = function (el) {
+    const inst = instances[el.closest('.' + moduleName).dataset.instance];
+    return inst;
+  };
+  this.renderAllInstance = function () {
+    for (const [key, value] of Object.entries(instances)) {
+      value.render(); // render all module2 instances
+    }
+  };
+  this.scanAllInstance = (cb) => {
+    console.log('scanAllInstance: ', moduleName);
+    for (const [key, value] of Object.entries(instances)) {
+      cb(value);
+    }
+  };
+  this.forModulesLoader = function (aModule) {
+    // const mn = aModule.getModuleName();
+    const __el = __modulesList.find(el => el.name === moduleName);
+    if (!__el) {
+      console.error(`Error - moduleName: ${moduleName} not found in __modulesList`);
+      return;
+    }
+    setTimeout(function (__el) {__modulesLoader.continueLoad(__el);}, 1, __el);
+    const r = { // тут перечисляются функции и свойства модуля которые будут доступные из вне.
+      moduleName: moduleName,
+
+      createInstance: aModule.createInstance.bind(aModule),
+      getInstance: aModule.getInstance.bind(aModule),
+      renderAllInstance: aModule.renderAllInstance.bind(aModule),
+      getModuleInstance: aModule.getModuleInstance.bind(aModule),
+      scanAllInstance: aModule.scanAllInstance.bind(aModule),
+    };
+    // r.createInstance.bind(aModule);
+    console.log('r: ', r);
+    __el.module = r;
+  };
+}
+
 var __modulesLoader = (() => {
   let __loadreadyCalBack = undefined;
 
@@ -122,8 +188,21 @@ function initInstance({module, el, appName, instName}) {
   el.extEl.classList.add(iName);
   return inst;
 }
+
 //  первый новый вариант:
 // вся инициализация и подготовка html происходит после вставки html в документ
+/*  пример:
+  callbackAfterLoadHtml(el){
+    try {
+      const inst = initInstanceAfterLoadHtml({
+        module: m_template2_, el: el,
+        // appName:`a1_`, // указывается в случае модуля-приложения(состоит из нескольких модулей)
+        instName: `instance1`
+      });
+      inst.counter = 30;
+    } catch (e) { }
+  },
+*/
 function initInstanceAfterLoadHtml({module, el, appName, instName}) {
   appName = !appName ? '' : appName;
   const iName = appName + instName;
@@ -140,18 +219,32 @@ function initInstanceAfterLoadHtml({module, el, appName, instName}) {
 // можно разбить загрузку на 2 этапа.
 // 1 - подготовка вставляемого html. происходит в onLoadCallback
 // 2 - инициализация экземпляра модуля. происходит в callbackAfterLoadHtml
-function initInstHtml({module, el, appName, instName}) {
+/* пример:
+  data-incs='{
+    module: m_template2_,
+    incFile: modulesUrl + "m_template2_/m_template2_.html",
+    onLoadCallback(el){try {
+        initInstHtml({ el: el, 
+          // appName: ``,
+          instName: `instance1`});
+    } catch (e) {debugger;}},
+    callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.counter = 30;
+    } catch (e) {debugger;}},
+  }'
+*/
+function initInstHtml({el, appName, instName}) {
   appName = !appName ? '' : appName;
   const iName = appName + instName;
   if (appName) el.extEl.dataset.app = appName;
-  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${module.moduleName}/m_resurs/`);
+  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${el.module.moduleName}/m_resurs/`);
   el.extEl.dataset.instance = iName;
   el.extEl.classList.add(iName);
-  el.module = module;
   el.appName = appName;
   el.iName = iName;
 }
-function initInst(el) { // {module, el, appName, instName}
+function initInstObj(el) { // {module, el, appName, instName}
   const inst = el.module.createInstance(el.iName);
   if (el.appName) inst.aname = el.appName;
   el.module = null;
