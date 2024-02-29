@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <title>mInp_versionV1 test</title>
+
+  <!-- вставка для модулей -->
+  <script src="/isLocal.js"></script>
+  <script>
+    if (typeof isLocal === 'undefined') var isLocal = false;
+    const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
+    console.log('modulesUrl: ', modulesUrl);
+    {
+      const s0 = '<' + 'script '; const s1 = '<' + '/script>'; const eol = '\r';
+
+      document.write(s0 + 'src="' + modulesUrl + 'utils.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'IncludHtml.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
+    }
+
+    // var __modulesList = [ // можно по простому так:
+    //   {name: 'mInp_versionV1', js: modulesUrl + 'mInp_versionV1/mInp_versionV1.js', css: modulesUrl + 'mInp_versionV1/mInp_versionV1.css', },
+    // ];
+    var __modulesList = [];
+    {
+      const mModulesList = ['mInp_versionV1',];
+      mModulesList.forEach(mModuleName => {
+        const str = `__modulesList.push({name: '${mModuleName}', js: modulesUrl + '${mModuleName}/${mModuleName}.js', css: modulesUrl + '${mModuleName}/${mModuleName}.css', })`;
+        eval(str);
+      });
+    }
+  </script>
+  <!-- /вставка для модулей -->
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      background-color: lightcyan;
+      margin: 0 auto;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>test модуль: mInp_versionV1</h2>
+  </div>
+
+  <div class="container">
+
+    <div class="incs" data-incs='{
+      module: mInp_versionV1,
+      incFile: modulesUrl + "mInp_versionV1/mInp_versionV1.html",
+      onLoadCallback(el){try {
+        initInstHtml({ el: el, 
+          // appName: ``,
+          instName: `instance1`});
+      } catch (e) {debugger;}},
+      callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.type = "text"
+        inst.placeholder = "ваше имя"
+        inst.value = "ффф"
+        inst.label = "Имя:"
+        inst.onInput = (e, inst) => {
+          console.log(inst.iname, "onInput", e.value);
+        }
+        inst.onChange = (e) => {
+          console.log(inst.iname, "onChange", e);
+        }
+      } catch (e) {debugger;}},
+    }'>этот элемент будет заменён из mInp_versionV1.html</div>
+
+  </div>
+
+</body>
+
+</html>

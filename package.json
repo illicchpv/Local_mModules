@@ -4,7 +4,7 @@
   "description": "",
   "main": "isLocal.js",
   "scripts": {
-    "cc": "hygen create module"
+    "+Module": "hygen create module"
   },
   "author": "",
   "license": "ISC"

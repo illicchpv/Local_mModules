@@ -1,0 +1,33 @@
+/* mInp_versionV1.css */
+.mInp_versionV1 {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  padding: 10px;
+  border: 1px solid lightslategray;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  .label {
+    flex-shrink: 1;
+  }
+
+  span{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    width: 70%;
+  }
+}
