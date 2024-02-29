@@ -1,0 +1,18 @@
+<!-- 
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mBtn_flatV2/mBtn_flatV2.html",
+      callbackAfterLoadHtml(el){
+        try {
+          const inst = initInstanceAfterLoadHtml({
+            module: mBtn_flatV2, el: el,
+            // appName:`a1_`, // указывается в случае модуля-приложения(состоит из нескольких модулей)
+            instName: `instance1`
+          });
+          inst.counter = 30;
+        } catch (e) { }
+      },
+    }'>этот элемент будет заменён из mBtn_flatV2.html</div>
+-->
+<button id="extId" class="mBtn_flatV2 buttonName" title="mBtn_flatV2.%buttonName%"
+  onclick="event.preventDefault(); mBtn_flatV2.getModuleInstance(this).doClick(event, this);"
+>button name</button>
