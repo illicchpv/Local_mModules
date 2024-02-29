@@ -1,9 +1,9 @@
 ---
-to: <%= absPath %>/<%= component_name %>.css
+to: <%= absPath %>/<%= module_name %>.css
 ---
 
-/* <%= component_name %>.css */
-.<%= component_name %> {
+/* <%= module_name %>.css */
+.<%= module_name %> {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24;
   padding: 10px;

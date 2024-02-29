@@ -1,16 +1,12 @@
----
-to: <%= absPath %>/<%= module_name %>.js
----
-
 {
-  const mn = '<%= module_name %>';
+  const mn = 'mBtn_flatV1';
   eval(`
     var ${mn} = new ${mn}fn('${mn}');
     ${mn}.forModulesLoader(${mn});
     ${mn}.moduleName = '${mn}';
   `);
 }
-function <%= module_name %>fn(mn) {
+function mBtn_flatV1fn(mn) {
   mBase.call(this); // отнаследовать
   this.setModuleName(mn);
 
@@ -21,6 +17,10 @@ function <%= module_name %>fn(mn) {
     const ins = {
       mname: this.moduleName,
       iname: instanceName,
+      
+      text: 'my button',
+      onClick: undefined,
+      clickCounter: 0,
 
       constructor(){
         this.iEl = document.querySelector(`.${this.mname}.${this.iname}`);
@@ -31,14 +31,15 @@ function <%= module_name %>fn(mn) {
           if (!document.querySelector(`.${this.mname}.${this.iname}`)) return;
           this.constructor();
         }
-        this.iEl.querySelector('.instance').innerHTML = this.iname;
-        this.iEl.querySelector('.counter').innerHTML = this.counter;
+        this.iEl.innerHTML = this.text;
+        this.iEl.
+          setAttribute('title', `mBtn_flatV1.${this.iname} #${this.clickCounter}`);
         return this;
       },
-      incCounter(){
-        this.counter++;
+      doClick(event, el) {
+        this.clickCounter++;
+        if (this.onClick) this.onClick(event, el);
         this.render();
-        return this;
       },
     };
 
