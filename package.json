@@ -1,0 +1,11 @@
+{
+  "name": "mmodules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "isLocal.js",
+  "scripts": {
+    "cc": "hygen create module"
+  },
+  "author": "",
+  "license": "ISC"
+}
