@@ -1,0 +1,33 @@
+<!-- 
+    <div class="incs" data-incs='{
+      module: mInp_versionV2,
+      incFile: modulesUrl + "mInp_versionV2/mInp_versionV2.html",
+      onLoadCallback(el){try {
+        initInstHtml({ el: el, 
+          // appName: ``,
+          instName: `instance1`});
+      } catch (e) {debugger;}},
+      callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.type = "text"
+        inst.value = ""
+        inst.label = "Введите имя:"
+        inst.onInput = (e, inst) => {
+          console.log(inst.iname, "onInput", e.value);
+        }
+        inst.onChange = (e) => {
+          console.log(inst.iname, "onChange", e);
+        }
+      } catch (e) {debugger;}},
+    }'>этот элемент будет заменён из mInp_versionV2.html</div>
+-->
+<span id="extId" class="mInp_versionV2">
+  <input class="input" type="text" 
+      autocomplete="off" readonly onfocus="this.removeAttribute('readonly')"
+      placeholder=" "
+      value="value"
+      oninput="mInp_versionV2.getModuleInstance(this).doOnInput(event, this)"
+      onchange="mInp_versionV2.getModuleInstance(this).doOnChange(event, this)"
+  >
+  <label class="label" for="">placeholder</label>
+</span>
