@@ -224,13 +224,13 @@ function initInstanceAfterLoadHtml({module, el, appName, instName}) {
     module: m_template2_,
     incFile: modulesUrl + "m_template2_/m_template2_.html",
     onLoadCallback(el){try {
-        initInstHtml({ el: el, 
-          // appName: ``,
-          instName: `instance1`});
+      const inst = initInstHtml({ el: el, 
+        // appName: ``,
+        instName: `instance1`});
     } catch (e) {debugger;}},
     callbackAfterLoadHtml(el){try {
-        const inst = initInstObj(el)
-        inst.counter = 30;
+      const inst = initInstObj(el)
+      inst.counter = 30;
     } catch (e) {debugger;}},
   }'
 */
@@ -243,6 +243,7 @@ function initInstHtml({el, appName, instName}) {
   el.extEl.classList.add(iName);
   el.appName = appName;
   el.iName = iName;
+  return {mname: el.module.moduleName, iname: iName};
 }
 function initInstObj(el) { // {module, el, appName, instName}
   const inst = el.module.createInstance(el.iName);

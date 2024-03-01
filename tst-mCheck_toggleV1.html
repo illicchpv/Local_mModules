@@ -1,8 +1,3 @@
----
-to: <%= absPath %>/../../tst-<%= module_name %>.html
----
-
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -11,7 +6,7 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
-  <title><%= module_name %> test</title>
+  <title>mCheck_toggleV1 test</title>
 
   <!-- вставка для модулей -->
   <script src="/isLocal.js"></script>
@@ -28,11 +23,11 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
     }
 
     // var __modulesList = [ // можно по простому так:
-    //   {name: '<%= module_name %>', js: modulesUrl + '<%= module_name %>/<%= module_name %>.js', css: modulesUrl + '<%= module_name %>/<%= module_name %>.css', },
+    //   {name: 'mCheck_toggleV1', js: modulesUrl + 'mCheck_toggleV1/mCheck_toggleV1.js', css: modulesUrl + 'mCheck_toggleV1/mCheck_toggleV1.css', },
     // ];
     var __modulesList = [];
     {
-      const mModulesList = ['<%= module_name %>',];
+      const mModulesList = ['mCheck_toggleV1',];
       mModulesList.forEach(mModuleName => {
         const str = `__modulesList.push({name: '${mModuleName}', js: modulesUrl + '${mModuleName}/${mModuleName}.js', css: modulesUrl + '${mModuleName}/${mModuleName}.css', })`;
         eval(str);
@@ -61,24 +56,28 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
 
 <body>
   <div class="container">
-    <h2>test модуль: <%= module_name %></h2>
+    <h2>test модуль: mCheck_toggleV1</h2>
   </div>
 
   <div class="container">
 
     <div class="incs" data-incs='{
-      module: <%= module_name %>,
-      incFile: modulesUrl + "<%= module_name %>/<%= module_name %>.html",
+      module: mCheck_toggleV1,
+      incFile: modulesUrl + "mCheck_toggleV1/mCheck_toggleV1.html",
       onLoadCallback(el){try {
         const inst = initInstHtml({ el: el, 
           // appName: ``,
           instName: `instance1`});
+        el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`%inId%`,`${inst.mname}_${inst.iname}`);
       } catch (e) {debugger;}},
       callbackAfterLoadHtml(el){try {
         const inst = initInstObj(el)
-        inst.counter = 30;
+        inst.isChecked = true;
+        inst.onCheck = (el) => {
+          console.log(`mToggleV1.${inst.iname} event onCheck isChecked: ${inst.isChecked} `);
+        };
       } catch (e) {debugger;}},
-    }'>этот элемент будет заменён из <%= module_name %>.html</div>
+    }'>этот элемент будет заменён из mCheck_toggleV1.html</div>
 
   </div>
 

@@ -65,15 +65,15 @@
       module: mBtn_flatV1,
       incFile: modulesUrl + "mBtn_flatV1/mBtn_flatV1.html",
       onLoadCallback(el){try {
-          initInstHtml({ el: el, // appName: ``,
-            instName: `instance1`});
+        const inst = initInstHtml({ el: el, // appName: ``,
+          instName: `instance1`});
       } catch (e) {debugger;}},
       callbackAfterLoadHtml(el){try {
-          const inst = initInstObj(el)
-          inst.text = `--${inst.iname}--`;
-          inst.onClick = (event, el) => {
-            console.log(`произошел ${inst.mname}.${inst.iname}.onClick`);
-          }
+        const inst = initInstObj(el)
+        inst.text = `--${inst.iname}--`;
+        inst.onClick = (event, el) => {
+          console.log(`произошел ${inst.mname}.${inst.iname}.onClick`);
+        }
       } catch (e) {debugger;}},
     }'>этот элемент будет заменён из mBtn_flatV1.html</div>
 

@@ -65,13 +65,13 @@
       module: m_template2_,
       incFile: modulesUrl + "m_template2_/m_template2_.html",
       onLoadCallback(el){try {
-          initInstHtml({ el: el, 
-            // appName: ``,
-            instName: `instance1`});
+        const inst = initInstHtml({ el: el, 
+          // appName: ``,
+          instName: `instance1`});
       } catch (e) {debugger;}},
       callbackAfterLoadHtml(el){try {
-          const inst = initInstObj(el)
-          inst.counter = 30;
+        const inst = initInstObj(el)
+        inst.counter = 30;
       } catch (e) {debugger;}},
     }'>этот элемент будет заменён из m_template2_.html</div>
 

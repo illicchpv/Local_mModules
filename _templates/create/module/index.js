@@ -4,7 +4,7 @@ module.exports = {
       {
         type: 'input',
         name: 'module_type',
-        message: 'тип модуля ([1-btn], 2-check, 3-input, 4-)?',
+        message: 'тип модуля ([1-btn], 2-check, 3-input)?',
       },
       {
         type: 'input',

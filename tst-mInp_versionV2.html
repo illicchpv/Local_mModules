@@ -65,7 +65,7 @@
       module: mInp_versionV2,
       incFile: modulesUrl + "mInp_versionV2/mInp_versionV2.html",
       onLoadCallback(el){try {
-        initInstHtml({ el: el, 
+        const inst = initInstHtml({ el: el, 
           // appName: ``,
           instName: `instance1`});
       } catch (e) {debugger;}},

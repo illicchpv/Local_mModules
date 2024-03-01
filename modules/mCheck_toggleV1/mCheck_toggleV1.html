@@ -1,0 +1,25 @@
+<!-- 
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mCheck_toggleV1/mCheck_toggleV1.html",
+      callbackAfterLoadHtml(el){
+        try {
+          const inst = initInstanceAfterLoadHtml({
+            module: mCheck_toggleV1, el: el,
+            // appName:`a1_`, // указывается в случае модуля-приложения(состоит из нескольких модулей)
+            instName: `instance1`
+          });
+          inst.counter = 30;
+        } catch (e) { }
+      },
+    }'>этот элемент будет заменён из mCheck_toggleV1.html</div>
+-->
+<span id="extId" class="mCheck_toggleV1 box">
+  <input type="checkbox" id="%inId%"
+    onchange="mCheck_toggleV1.getModuleInstance(this).setChecked(this)"
+  >
+  <label class="button" for="%inId%">
+    <span class="on">ВКЛ</span>
+    <span class="off">выкл</span>
+  </label>
+</span>
+
