@@ -224,7 +224,7 @@ function initInstanceAfterLoadHtml({module, el, appName, instName}) {
     module: m_template2_,
     incFile: modulesUrl + "m_template2_/m_template2_.html",
     onLoadCallback(el){try {
-      const inst = initInstHtml({ el: el, 
+      const {mname, iname} = initInstHtml({ el: el, 
         // appName: ``,
         instName: `instance1`});
     } catch (e) {debugger;}},

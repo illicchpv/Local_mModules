@@ -70,7 +70,7 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
       module: <%= module_name %>,
       incFile: modulesUrl + "<%= module_name %>/<%= module_name %>.html",
       onLoadCallback(el){try {
-        const inst = initInstHtml({ el: el, 
+        const {mname, iname} = initInstHtml({ el: el, 
           // appName: ``,
           instName: `instance1`});
       } catch (e) {debugger;}},
