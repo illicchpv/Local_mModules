@@ -22,6 +22,9 @@ function <%= module_name %>fn(mn) {
       mname: this.moduleName,
       iname: instanceName,
 
+      counter: 0,
+      onIncCounter: undefined,
+
       constructor(){
         this.iEl = document.querySelector(`.${this.mname}.${this.iname}`);
         if (!this.iEl) {console.warn(`в конструкторе ${this.mname} не найден корневой элемент`); return; }
@@ -35,8 +38,9 @@ function <%= module_name %>fn(mn) {
         this.iEl.querySelector('.counter').innerHTML = this.counter;
         return this;
       },
-      incCounter(){
+      incCounter(event, el){
         this.counter++;
+        if (this.onIncCounter) this.onIncCounter(event, el);
         this.render();
         return this;
       },

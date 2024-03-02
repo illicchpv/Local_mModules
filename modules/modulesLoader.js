@@ -59,7 +59,6 @@ function mBase() {
       scanAllInstance: aModule.scanAllInstance.bind(aModule),
     };
     // r.createInstance.bind(aModule);
-    console.log('r: ', r);
     __el.module = r;
   };
 }

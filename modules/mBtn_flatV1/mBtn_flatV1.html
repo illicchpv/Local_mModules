@@ -1,3 +1,4 @@
+<!--
 <div class="incs" data-incs='{
   module: mBtn_flatV2,
   incFile: modulesUrl + "mBtn_flatV2/mBtn_flatV2.html",
@@ -9,11 +10,13 @@
   callbackAfterLoadHtml(el){try {
     const inst = initInstObj(el)
     inst.text = `--${inst.iname}--`;
+    inst.disabled = false;
     inst.onClick = (event, el) => {
       console.log(`произошел mBtn_flatV2.${inst.iname}.onClick`);
     }
   } catch (e) {debugger;}},
 }'>этот элемент будет заменён из mBtn_flatV2.html</div>
-<button id="extId" class="mBtn_flatV1 buttonName" title="mBtn_flatV1.%buttonName%" type="button"
-  onclick="event.preventDefault(); mBtn_flatV1.getModuleInstance(this).doClick(event, this);"
+-->
+<button disabled id="extId" class="mBtn_flatV1 buttonName" title="mBtn_flatV1.%buttonName%" type="button"
+  onclick="mBtn_flatV1.getModuleInstance(this).doClick(event, this);"
 >button name</button>

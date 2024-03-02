@@ -72,7 +72,7 @@
       callbackAfterLoadHtml(el){try {
         const inst = initInstObj(el)
         inst.text = `--${inst.iname}--`;
-        // inst.disabled = true;
+        inst.disabled = false;
         inst.onClick = (event, el) => {
           inst.disabled = true;
           const txt = inst.text;

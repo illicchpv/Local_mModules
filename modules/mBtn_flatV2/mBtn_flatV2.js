@@ -37,6 +37,8 @@ function mBtn_flatV2fn(mn) {
         else this.iEl.removeAttribute('disabled', true);
         this.iEl.
           setAttribute('title', `mButton0V2.${this.iname} #${this.clickCounter}`);
+        if(this._disabled) this.iEl.setAttribute('disabled', true);
+        else this.iEl.removeAttribute('disabled', true);
         return this;
       },
       set disabled(v){
@@ -47,6 +49,7 @@ function mBtn_flatV2fn(mn) {
         return !!this_disabled;
       },
       doClick(event, el) {
+        event.preventDefault();
         this.clickCounter++;
         if (this.onClick) this.onClick(event, el);
         this.render();

@@ -29,4 +29,9 @@
   &.buttonName:active{
     color: red;
   }  
+  &.buttonName:disabled{
+    pointer-events: none;
+    background-color: rgba(51, 51, 51, 0.1);
+    box-shadow: 5px 5px 6px 4px transparent;    
+  }
 }
