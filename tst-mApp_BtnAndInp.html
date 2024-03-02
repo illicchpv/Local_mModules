@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <title>mApp_BtnAndInp test</title>
+
+  <!-- вставка для модулей -->
+  <script src="/isLocal.js"></script>
+  <script>
+    if (typeof isLocal === 'undefined') var isLocal = false;
+    const modulesUrl = isLocal ? '/modules/' : '//aclive.ru/modules-tests/lib1/';
+    console.log('modulesUrl: ', modulesUrl);
+    {
+      const s0 = '<' + 'script '; const s1 = '<' + '/script>'; const eol = '\r';
+
+      document.write(s0 + 'src="' + modulesUrl + 'utils.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'IncludHtml.js" defer>' + s1);
+      document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
+    }
+
+    // var __modulesList = [ // можно по простому так:
+    //   {name: 'mApp_BtnAndInp', js: modulesUrl + 'mApp_BtnAndInp/mApp_BtnAndInp.js', css: modulesUrl + 'mApp_BtnAndInp/mApp_BtnAndInp.css', },
+    // ];
+    var __modulesList = [];
+    {
+      const mModulesList = ['mApp_BtnAndInp', 'mInp_versionV1', 'mBtn_flatV1',];
+      mModulesList.forEach(mModuleName => {
+        const str = `__modulesList.push({name: '${mModuleName}', js: modulesUrl + '${mModuleName}/${mModuleName}.js', css: modulesUrl + '${mModuleName}/${mModuleName}.css', })`;
+        eval(str);
+      });
+    }
+  </script>
+  <!-- /вставка для модулей -->
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      background-color: lightcyan;
+      margin: 0 auto;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>test модуль: mApp_BtnAndInp</h2>
+  </div>
+
+  <div class="container">
+    <button onclick="dasabledToggle1()">disabled toggle1</button>
+    <script>
+      function dasabledToggle1() {
+        const inst = mApp_BtnAndInp.getInstance(`app1`);
+        inst.disabled = !inst.disabled;
+      }
+    </script>
+  </div>
+
+  <div class="container">
+
+    <div class="incs" data-incs='{
+      module: mApp_BtnAndInp,
+      incFile: modulesUrl + "mApp_BtnAndInp/mApp_BtnAndInp.html",
+      onLoadCallback: onLoadCallbackHandler1,
+      callbackAfterLoadHtml: callbackAfterLoadHtmlHandler1,
+    }'>этот элемент будет заменён из mApp_BtnAndInp.html</div>
+    <script>
+      const onLoadCallbackHandler1 = (el) => {
+        try {
+          const {mname, iname} = initInstHtml({
+            el: el,
+            appName: `app1`,
+            instName: ``
+          });
+          //el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`%inId%`,`${mname}_${iname}`); // преобразование перед вставкой
+        } catch (e) {debugger;}
+      };
+      const callbackAfterLoadHtmlHandler1 = (el) => {
+        try {
+          const inst = initInstObj(el);
+
+          inst.title = "форма №10";
+          inst.counter = 30;
+          inst.disabled = false;
+          inst.onIncCounter = (event, el) => {
+            console.log(`onIncCounter mApp_BtnAndInp.${inst.iname}.onIncCounter`);
+          };
+        } catch (e) {debugger;}
+      }
+    </script>
+
+  </div>
+
+  <div class="container">
+    <button onclick="dasabledToggle2()">disabled toggle2</button>
+    <script>
+      function dasabledToggle2() {
+        const inst = mApp_BtnAndInp.getInstance(`app2`);
+        inst.disabled = !inst.disabled;
+      }
+    </script>
+  </div>
+
+  <div class="container">
+    <div class="incs" data-incs='{
+      module: mApp_BtnAndInp,
+      incFile: modulesUrl + "mApp_BtnAndInp/mApp_BtnAndInp.html",
+      onLoadCallback: onLoadCallbackHandler2,
+      callbackAfterLoadHtml: callbackAfterLoadHtmlHandler2,
+    }'>этот элемент будет заменён из mApp_BtnAndInp.html</div>
+    <script>
+      const onLoadCallbackHandler2 = (el) => {
+        try {
+          const {mname, iname} = initInstHtml({
+            el: el,
+            appName: `app2`,
+            instName: ``
+          });
+          //el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`%inId%`,`${mname}_${iname}`); // преобразование перед вставкой
+        } catch (e) {debugger;}
+      };
+      const callbackAfterLoadHtmlHandler2 = (el) => {
+        try {
+          const inst = initInstObj(el);
+
+          inst.title = "форма №12";
+          inst.counter = 30;
+          inst.disabled = false;
+          inst.onIncCounter = (event, el) => {
+            console.log(`onIncCounter mApp_BtnAndInp.${inst.iname}.onIncCounter`);
+          };
+        } catch (e) {debugger;}
+      }
+    </script>
+
+
+  </div>
+
+</body>
+
+</html>

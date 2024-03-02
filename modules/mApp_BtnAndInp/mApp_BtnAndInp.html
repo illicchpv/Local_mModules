@@ -1,0 +1,161 @@
+<!-- 
+    <div class="incs" data-incs='{
+      module: mBtn_test001,
+      incFile: modulesUrl + "mBtn_test001/mBtn_test001.html",
+      onLoadCallback(el){try {
+        const {mname, iname} = initInstHtml({ el: el, 
+          // appName: ``,
+          instName: `instance1`});
+        //el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`%inId%`,`${mname}_${iname}`); // преобразование перед вставкой
+      } catch (e) {debugger;}},
+      callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.counter = 30;
+        inst.disabled = false;
+        inst.onIncCounter = (event, el) =>{
+          console.log(`onIncCounter mBtn_test001.${inst.iname}.onIncCounter`);
+        }        
+      } catch (e) {debugger;}},
+    }'>этот элемент будет заменён из mBtn_test001.html</div>
+-->
+<div id="extId" class="mApp_BtnAndInp">
+
+  <h2><span class="instance">instance</span></h2>
+  <div class="box">
+    <h2 class="title">title</h2>
+
+    <!-- iName -->
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mInp_versionV1/mInp_versionV1.html",
+      module: mInp_versionV1,
+      onLoadCallback(el){try {
+        const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+        const {mname, iname} = initInstHtml({ el: el, 
+          appName: app,
+          instName: `iName`});
+      } catch (e) {debugger;}},
+      callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.disabled = false;
+        inst.type = "text"
+        inst.placeholder = "ваше имя"
+        inst.value = ""
+        inst.label = "Имя:"
+        inst.onInput = (e, el) => {
+          console.log(inst.iname, "onInput", e.value);
+        }
+        inst.onChange = (e) => {
+          console.log(inst.iname, "onChange", e);
+        }
+      } catch (e) {debugger;}},
+    }'>этот элемент будет заменён из mInp_versionV1.html</div>
+
+    <!-- iPassword -->
+    <div class="incs" data-incs='{
+      incFile: modulesUrl + "mInp_versionV1/mInp_versionV1.html",
+      module: mInp_versionV1,
+      onLoadCallback(el){try {
+        const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+        const {mname, iname} = initInstHtml({ el: el, 
+          appName: app,
+          instName: `iPassword`});
+      } catch (e) {debugger;}},
+      callbackAfterLoadHtml(el){try {
+        const inst = initInstObj(el)
+        inst.disabled = false;
+        inst.type = "password"
+        inst.placeholder = "пароль"
+        inst.value = ""
+        inst.label = "Пароль:"
+        inst.onInput = (e, inst) => {
+          console.log(`${inst.iname}.onInput`, e);
+        }
+        inst.onChange = (e) => {
+          console.log(`${inst.iname}.onChange`, e);
+        }
+      } catch (e) {debugger;}},
+    }'>этот элемент будет заменён из mInp_versionV1.html</div>
+
+    <div class="row">
+      <!-- iOk -->
+      <div class="incs" data-incs='{ 
+        module: mBtn_flatV1,
+        incFile: modulesUrl + "mBtn_flatV1/mBtn_flatV1.html",
+        onLoadCallback(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const {mname, iname} = initInstHtml({ el: el, 
+            appName: app, instName: `iOk`});
+        } catch (e) {debugger;}},
+        callbackAfterLoadHtml(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const inst = initInstObj(el)
+
+          inst.text = "ok";
+          inst.onClick = (event, el) => {
+            console.log(`произошел ${inst.iname}.onClick`);
+            const rez = [app + "iPassword", app + "iName"].reduce((sum, n) => {
+              const ins = mInp_versionV1.getInstance(n);
+              if (ins) sum.push({inst: n, val: ins.value});
+              return sum;
+            }, []);
+            alert(JSON.stringify(rez, null, 2));
+          }
+        } catch (e) {debugger;}},
+      }'>этот элемент будет заменён из mBtn_flatV1.html</div>
+
+      <!-- iReset -->
+      <div class="incs" data-incs='{ 
+        module: mBtn_flatV1,
+        incFile: modulesUrl + "mBtn_flatV1/mBtn_flatV1.html",
+        onLoadCallback(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const {mname, iname} = initInstHtml({ el: el, 
+            appName: app, instName: `iReset`});
+        } catch (e) {debugger;}},
+        callbackAfterLoadHtml(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const inst = initInstObj(el)
+
+          inst.text = "reset";
+          inst.onClick = (event, el) => {
+            console.log(`произошел ${inst.iname}.onClick`);
+            [[app + "iPassword", ""], [app + "iName", ""]].forEach(([n, v]) => {
+              const ins = mInp_versionV1.getInstance(n);
+              if(ins){
+                ins.value = v;
+                ins.render();
+              }
+            });
+          }
+        } catch (e) {debugger;}},
+      }'>этот элемент будет заменён из mBtn_flatV1.html</div>
+
+      <!-- iPreset -->
+      <div class="incs" data-incs='{ 
+        module: mBtn_flatV1,
+        incFile: modulesUrl + "mBtn_flatV1/mBtn_flatV1.html",
+        onLoadCallback(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const {mname, iname} = initInstHtml({ el: el, 
+            appName: app, instName: `iPreset`});
+        } catch (e) {debugger;}},
+        callbackAfterLoadHtml(el){try {
+          const app = el.docEl.closest(".mApp_BtnAndInp").dataset.app;
+          const inst = initInstObj(el)
+
+          inst.text = "preset";
+          inst.onClick = (event, el) => {
+            console.log(`произошел ${inst.iname}.onClick`);
+            [[app + "iPassword", "mypassword"], [app + "iName", "myname"]].forEach(([n, v]) => {
+              const ins = mInp_versionV1.getInstance(n);
+              if(ins){
+                ins.value = v;
+                ins.render();
+              }
+            });
+          }
+        } catch (e) {debugger;}},
+      }'>этот элемент будет заменён из mBtn_flatV1.html</div>
+    </div>
+
+  </div>

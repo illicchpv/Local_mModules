@@ -4,7 +4,7 @@ module.exports = {
       {
         type: 'input',
         name: 'module_type',
-        message: 'тип модуля ([1-btn], 2-check, 3-input)?',
+        message: 'тип модуля ([1-btn], 2-check, 3-input, a-app)?',
       },
       {
         type: 'input',
@@ -22,6 +22,7 @@ module.exports = {
         default: break; //case '1'
         case '2': mn = 'mCheck_'; break;
         case '3': mn = 'mInp_'; break;
+        case '3': mn = 'mApp_'; break;
       }
       const min_len = 4;
       const mn2 = module_name.trim();
