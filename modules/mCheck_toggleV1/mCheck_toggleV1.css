@@ -4,8 +4,15 @@
   --h: calc( var(--w) / 2);
   --delta: calc((var(--h) / 10)/2);
   --d: calc(var(--h) - var(--delta)*2);
-  --bg-on: #20096d;
-  --bg-off:  #d2d2d2;
+  --bg-on: rgba(32, 9, 109, 1.0);
+  --bg-off:  rgba(214, 158, 158, 1.0);
+  --bg-on-disabled: rgba(118, 97, 186, 0.5);
+  --bg-off-disabled:  rgba(214, 158, 158, 0.5);
+  --clr-on: rgba(144, 238, 144);
+  --clr-off: rgba(0, 0, 0);
+  --clr-on-disabled: rgba(144, 238, 144, 0.8);
+  --clr-off-disabled: rgba(0, 0, 0, 0.8);
+  --fs: 1.1em;
 
   box-sizing: border-box;
 
@@ -56,22 +63,41 @@
   }
 
   .off {
+    font-size: var(--fs);
     font-family: sans-serif;
     position: absolute;
     right: calc((90px - 2 * 5px)/2);
     right: 30px;
-    right: calc(var(--d)/4);;
-    top: calc(var(--h)/2 - 1.3em/2);
-    color: black;
+    right: calc(var(--d)/6);
+    top: calc(var(--h)/2 - 1.5em/2);
+    color: var(--clr-off);
     font-weight: 400;
   }
   .on {
+    font-size: var(--fs);
     font-family: sans-serif;
     position: absolute;
     left: 30px;
-    left: calc(var(--d)/4);
-    top: calc(var(--h)/2 - 1.3em/2);
-    color: lightgreen;
+    left: calc(var(--d)/6);
+    top: calc(var(--h)/2 - 1.5em/2);
+    color: var(--clr-on);
     font-weight: 400;
+  }
+
+  &[disabled]{
+    pointer-events: none;
+
+    input+.button {
+      background-color: var(--bg-off-disabled);
+    }
+    input:checked+.button {
+      background-color: var(--bg-on-disabled);
+    }
+    .off{
+      color: var(--clr-off-disabled);
+    }
+    .on{
+      color: var(--clr-on-disabled);
+    }
   }
 }

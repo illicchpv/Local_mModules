@@ -19,6 +19,7 @@ function mCheck_toggleV1fn(mn) {
       iname: instanceName,
 
       isChecked: false,
+      _disabled: false,
 
       constructor(){
         this.iEl = document.querySelector(`.${this.mname}.${this.iname}`);
@@ -34,11 +35,20 @@ function mCheck_toggleV1fn(mn) {
         }else{
           this.iEl.querySelector('input').removeAttribute('checked');
         }
+        if(this._disabled) this.iEl.setAttribute('disabled', true);
+        else this.iEl.removeAttribute('disabled', true);
         return this;
       },
       setChecked(el){
         this.isChecked = el.checked;
         if (this.onCheck) this.onCheck(el);
+      },
+      set disabled(v){
+        this._disabled = !!v;
+        this.render();
+      },
+      get disabled(){
+        return !!this_disabled;
       },
     };
 
