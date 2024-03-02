@@ -48,7 +48,7 @@ function mCheck_toggleV1fn(mn) {
         this.render();
       },
       get disabled(){
-        return !!this_disabled;
+        return !!this._disabled;
       },
     };
 

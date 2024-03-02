@@ -24,6 +24,7 @@ function <%= module_name %>fn(mn) {
 
       counter: 0,
       onIncCounter: undefined,
+      _disabled: false,
 
       constructor(){
         this.iEl = document.querySelector(`.${this.mname}.${this.iname}`);
@@ -34,6 +35,9 @@ function <%= module_name %>fn(mn) {
           if (!document.querySelector(`.${this.mname}.${this.iname}`)) return;
           this.constructor();
         }
+        if(this._disabled) this.iEl.setAttribute('disabled', true);
+        else this.iEl.removeAttribute('disabled', true);
+
         this.iEl.querySelector('.instance').innerHTML = this.iname;
         this.iEl.querySelector('.counter').innerHTML = this.counter;
         return this;
@@ -43,6 +47,13 @@ function <%= module_name %>fn(mn) {
         if (this.onIncCounter) this.onIncCounter(event, el);
         this.render();
         return this;
+      },
+      set disabled(v){
+        this._disabled = !!v;
+        this.render();
+      },
+      get disabled(){
+        return !!this._disabled;
       },
     };
 

@@ -4,8 +4,8 @@ to: <%= absPath %>/<%= module_name %>.html
 
 <!-- 
     <div class="incs" data-incs='{
-      module: <%= module_name %>,
-      incFile: modulesUrl + "<%= module_name %>/<%= module_name %>.html",
+      module: mBtn_test001,
+      incFile: modulesUrl + "mBtn_test001/mBtn_test001.html",
       onLoadCallback(el){try {
         const {mname, iname} = initInstHtml({ el: el, 
           // appName: ``,
@@ -15,11 +15,12 @@ to: <%= absPath %>/<%= module_name %>.html
       callbackAfterLoadHtml(el){try {
         const inst = initInstObj(el)
         inst.counter = 30;
+        inst.disabled = false;
         inst.onIncCounter = (event, el) =>{
-          console.log(`onIncCounter <%= module_name %>.${inst.iname}.onClick`);
+          console.log(`onIncCounter mBtn_test001.${inst.iname}.onIncCounter`);
         }        
       } catch (e) {debugger;}},
-    }'>этот элемент будет заменён из <%= module_name %>.html</div>
+    }'>этот элемент будет заменён из mBtn_test001.html</div>
 -->
 <div id="extId" class="<%= module_name %>">
   <style>

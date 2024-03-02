@@ -65,6 +65,16 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
   </div>
 
   <div class="container">
+    <button onclick="dasabledToggle()">disabled toggle</button>
+    <script>
+      function dasabledToggle(){
+        const inst = <%= module_name %>.getInstance(`instance1`);
+        inst.disabled = !inst.disabled;
+      }
+    </script>
+  </div>
+
+  <div class="container">
 
     <div class="incs" data-incs='{
       module: <%= module_name %>,
@@ -78,6 +88,7 @@ to: <%= absPath %>/../../tst-<%= module_name %>.html
       callbackAfterLoadHtml(el){try {
         const inst = initInstObj(el)
         inst.counter = 30;
+        inst.disabled = false;
         inst.onIncCounter = (event, el) =>{
           console.log(`onIncCounter <%= module_name %>.${inst.iname}.onIncCounter`);
         }        

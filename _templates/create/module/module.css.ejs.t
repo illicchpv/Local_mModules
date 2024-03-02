@@ -4,6 +4,7 @@ to: <%= absPath %>/<%= module_name %>.css
 
 /* <%= module_name %>.css */
 .<%= module_name %> {
+  position: relative;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24;
   padding: 10px;
@@ -36,5 +37,15 @@ to: <%= absPath %>/<%= module_name %>.css
   }
   .counter {
     color: crimson;
+  }
+
+  &[disabled]{
+    pointer-events: none;
+  }
+  &[disabled]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(154, 154, 154, 0.2);
   }
 }
