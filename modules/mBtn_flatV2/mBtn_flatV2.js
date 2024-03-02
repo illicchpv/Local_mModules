@@ -21,6 +21,7 @@ function mBtn_flatV2fn(mn) {
       text: 'my button',
       onClick: undefined,
       clickCounter: 0,
+      _disabled: false,
 
       constructor(){
         this.iEl = document.querySelector(`.${this.mname}.${this.iname}`);
@@ -32,9 +33,18 @@ function mBtn_flatV2fn(mn) {
           this.constructor();
         }
         this.iEl.innerHTML = this.text;
+        if(this._disabled) this.iEl.setAttribute('disabled', true);
+        else this.iEl.removeAttribute('disabled', true);
         this.iEl.
           setAttribute('title', `mButton0V2.${this.iname} #${this.clickCounter}`);
         return this;
+      },
+      set disabled(v){
+        this._disabled = !!v;
+        this.render();
+      },
+      get disabled(){
+        return !!this_disabled;
       },
       doClick(event, el) {
         this.clickCounter++;
