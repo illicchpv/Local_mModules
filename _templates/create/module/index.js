@@ -1,10 +1,11 @@
 module.exports = {
   prompt: ({inquirer}) => {
+    const selection = '(1-btn, 2-check, 3-input, a-app)';
     const questions = [
       {
         type: 'input',
         name: 'module_type',
-        message: 'тип модуля ([1-btn], 2-check, 3-input, a-app)?',
+        message: `тип модуля ${selection}?`,
       },
       {
         type: 'input',
@@ -17,12 +18,15 @@ module.exports = {
       const {module_name, module_type} = answers;
       // throw new Error(` module_type:[${module_type.trim()}] module_name:[${module_name.trim()}]`);
 
-      let mn = 'mBtn_';
+      let mn = '';
       switch (module_type.trim()) {
-        default: break; //case '1'
+        case '1': mn = 'mBtn_'; break;
         case '2': mn = 'mCheck_'; break;
         case '3': mn = 'mInp_'; break;
-        case '3': mn = 'mApp_'; break;
+        case 'a': mn = 'mApp_'; break;
+      }
+      if(!mn){
+        throw new Error(`невозможный выбор [${module_type}] возможны варианты:${selection}`);
       }
       const min_len = 4;
       const mn2 = module_name.trim();
