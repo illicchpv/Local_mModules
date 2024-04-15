@@ -170,7 +170,7 @@ function __modulesReady() {
           const event = new Event("modulesLoader.load.finish");
           document.dispatchEvent(event);
         }, 1);
-        
+
       }, 1);
     }
   );
@@ -233,16 +233,18 @@ function initInstanceAfterLoadHtml({module, el, appName, instName}) {
     } catch (e) {debugger;}},
   }'
 */
-function initInstHtml({el, appName, instName}) {
+function initInstHtml({module, el, appName, instName}) {
   appName = !appName ? '' : appName;
   const iName = appName + instName;
   if (appName) el.extEl.dataset.app = appName;
-  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${el.module.moduleName}/m_resurs/`);
+  if(!module) module = el.module
+  el.extEl.innerHTML = el.extEl.innerHTML.replaceAll(`./m_resurs/`, `${modulesUrl}${module.moduleName}/m_resurs/`);
   el.extEl.dataset.instance = iName;
   el.extEl.classList.add(iName);
   el.appName = appName;
   el.iName = iName;
-  return {mname: el.module.moduleName, iname: iName};
+  el.module = module;
+  return {mname: module.moduleName, iname: iName};
 }
 function initInstObj(el) { // {module, el, appName, instName}
   const inst = el.module.createInstance(el.iName);

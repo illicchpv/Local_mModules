@@ -21,7 +21,6 @@
       document.write(s0 + 'src="' + modulesUrl + 'modulesLoader.js" defer>' + s1);
     }
     var __modulesList = [
-      {name: 'mButtonV1', js: modulesUrl + 'mButtonV1/mButtonV1.js', css: modulesUrl + 'mButtonV1/mButtonV1.css', },
       {name: 'mButton0V1', js: modulesUrl + 'mButton0V1/mButton0V1.js', css: modulesUrl + 'mButton0V1/mButton0V1.css', },
     ];
   </script>
@@ -52,20 +51,6 @@
 
   <div class="container">
     <div class="incs" data-incs='{ 
-      incFile: modulesUrl + "mButtonV1/mButtonV1.html",
-      onLoadCallback(el){
-        try{
-          const inst = initInstance({ module: mButtonV1, el: el, instName: `instance1`})
-          
-          inst.text = `--${inst.iname}--`;
-          inst.onClick = (event, el) => {
-            console.log(`произошел inst.onClick`);
-            console.log(`произошел mButtonV1.${inst.iname}.onClick`);
-          }
-        }catch(e){}
-      },
-    }'>этот элемент будет заменён из mButtonV1.html</div>
-    <div class="incs" data-incs='{ 
       incFile: modulesUrl + "mButton0V1/mButton0V1.html",
       onLoadCallback(el){
         try{
@@ -82,20 +67,6 @@
   </div>
 
   <div class="container">
-    <div class="incs" data-incs='{ 
-      incFile: modulesUrl + "mButtonV1/mButtonV1.html",
-      onLoadCallback(el){
-        try{
-          const inst = initInstance({ module: mButtonV1, el: el, instName: `instance2`})
-          
-          inst.text = `--${inst.iname}--`;
-          inst.onClick = (event, el) => {
-            console.log(`произошел inst.onClick`);
-            console.log(`произошел mButtonV1.${inst.iname}.onClick`);
-          }
-        }catch(e){}
-      },
-    }'>этот элемент будет заменён из mButtonV1.html</div>
     <div class="incs" data-incs='{ 
       incFile: modulesUrl + "mButton0V1/mButton0V1.html",
       onLoadCallback(el){

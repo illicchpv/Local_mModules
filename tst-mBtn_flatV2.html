@@ -71,7 +71,7 @@
       } catch (e) {debugger;}},
       callbackAfterLoadHtml(el){try {
         const inst = initInstObj(el)
-        inst.text = `--${inst.iname}--`;
+        inst.text = `--${inst.iname}-click-`;
         inst.disabled = false;
         inst.onClick = (event, el) => {
           inst.disabled = true;
